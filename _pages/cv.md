@@ -32,6 +32,12 @@ Work experience
   * Duties included: Tagging issues
   * Supervisor: Professor Git
   
+```python
+import time
+
+print("hi")
+
+```
 Skills
 ======
 * Skill 1
