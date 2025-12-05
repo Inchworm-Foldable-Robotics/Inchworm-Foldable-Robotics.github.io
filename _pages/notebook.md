@@ -7,8 +7,6 @@ redirect_from:
   - /resume
 ---
 
-Below is a Markdown template you can paste directly into Canvas and then customize for your project.
-
 ---
 
 # Development of the Model
