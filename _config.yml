@@ -9,7 +9,7 @@
 # Basic Site Settings
 locale                   : "en-US"
 site_theme               : "default" # Currently available options are "default", "air"
-title                    : "Your Name / Site Title"
+title                    : "Inchworm"
 title_separator          : "-"
 name                     : &name "Your Name"
 description              : &description "Your Name's academic portfolio"   # Update this with a general description of your site, this is the default if not overridden by a page
@@ -23,7 +23,7 @@ repository               : "Inchworm-Foldable-Robotics/Inchworm-Foldable-Robotic
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : #"profile.png"
+  avatar           : "profile.png"
   name             : "Inchworm Foldable Robotics"
   pronouns         : # example: "she/her"  
   bio              : "Driven by the principles of foldable robotics, this compact inchworm robot demonstrates how far creativity, clever mechanisms, and a single sheet of material can go."
