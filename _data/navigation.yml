@@ -22,6 +22,18 @@ main:
         
   # - title: "Blog Posts"
   #   url: /year-archive/
+
+  - title: "Jupyter Notebook"
+    url: /notebook/
+  
+  - title: "Design"
+    url: /design/
+  
+  - title: "Results"
+    url: /results/
+
+  - title: "MK 2"
+    url: /mk2/
     
   - title: "CV"
     url: /cv/
