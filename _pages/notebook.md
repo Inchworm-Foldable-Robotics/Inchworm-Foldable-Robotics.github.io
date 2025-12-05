@@ -1,7 +1,7 @@
 ---
 layout: archive
-title: "CV"
-permalink: /cv/
+title: "Jupyter Notebook"
+permalink: /notebook/
 author_profile: true
 redirect_from:
   - /resume
