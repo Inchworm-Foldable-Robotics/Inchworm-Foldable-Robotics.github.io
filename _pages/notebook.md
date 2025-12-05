@@ -22,10 +22,10 @@ The robot is a Manduca sexta–inspired inchworm crawler with two friction-modul
 * **Biological inspiration:** looping, two-anchor gait with alternating front/rear grip.
 * **Scale and target metrics (from Assignment 1, to be confirmed):**
 
-  * Body length ($L \approx 100\,\text{mm}$)  
-  * Target stride ($S \approx 0.25L$)
-  * Target average speed ($v \approx 10\ \text{mm/s}$)
-  * Friction ratio ($\mu_\text{anchor} / \mu_\text{slide} \gtrsim 3$) 
+  * Body length $L \approx 100\,\text{mm}$  
+  * Target stride $S \approx 0.25L$
+  * Target average speed $v \approx 10\ \text{mm/s}$
+  * Friction ratio $\mu_\text{anchor} / \mu_\text{slide} \gtrsim 3$ 
 * **This model’s purpose:**
 
   * Capture the robot’s planar dynamics (forward motion + arching).
@@ -79,29 +79,29 @@ The dynamic model includes both structural compliance and actuator dynamics.
 
   * Flexure hinges modeled as torsional springs and dampers:
 
-    * Stiffness ($k_\theta$) from Assignment 5 parameter identification. 
-    * Damping ($b_\theta$) tuned to match experimental decay.
+    * Stiffness $k_\theta$ from Assignment 5 parameter identification. 
+    * Damping $b_\theta$ tuned to match experimental decay.
   * Represented in MuJoCo via `joint` attributes (`springref`, `stiffness`, `damping`) or via `tendon` springs.
 
 * **Actuator model:**
 
   * Servo-like behavior modeled as **position actuators** with gains:
 
-    * Proportional gain ($k_p$) (position stiffness).
-    * Derivative gain ($k_v$) (effective actuator damping).
+    * Proportional gain $k_p$ (position stiffness).
+    * Derivative gain $k_v$ (effective actuator damping).
   * Command input is joint target angle following a periodic gait pattern (e.g., square/triangular wave).
 
 * **Friction model:**
 
   * Different `friction` parameters for:
 
-    * Pad geoms ($high (\mu_\text{anchor})$).
-    * Base/body geoms ($low (\mu_\text{slide})$).
+    * Pad geoms $high (\mu_\text{anchor})$.
+    * Base/body geoms $low (\mu_\text{slide})$.
   * Values based on friction experiment (Assignment 5) and/or tracker-based tests. 
 
 **TODO:**
 
-* Insert the final values of ($k_\theta), (b_\theta), (k_p), (k_v$), and friction coefficients once parameter identification is complete.
+* Insert the final values of $ (k_\theta), (b_\theta), (k_p), (k_v) $, and friction coefficients once parameter identification is complete.
 * Note which joint(s) use compliant vs rigid modeling.
 
 ---
@@ -340,20 +340,20 @@ This section describes how the dynamic model is used to explore how performance 
 
 * **Gait frequency / cycle period**:
 
-  * Parameter: (f) [Hz] or period ($T = 1/f$).
+  * Parameter: (f) [Hz] or period $T = 1/f$.
   * Motivation: affects stride length and slip.
 * **Joint stiffness (k_\theta)**:
 
   * Parameter: flexure stiffness (N·m/rad).
   * Motivation: trade-off between energy storage, controllability, and arching amplitude.
-* **Pad friction ($\mu_\text{anchor}) / (\mu_\text{slide}$)**:
+* **Pad friction $\mu_\text{anchor} / \mu_\text{slide}$**:
 
   * Parameter: friction ratio via material choice or pad normal load.
   * Motivation: determines net thrust vs slip.
 
 **Primary performance metric (example):**
 
-* Average forward speed:
+* Average forward speed:  
   $$
   v_x = \frac{x_\text{end} - x_\text{start}}{T_\text{sim}}
   $$
@@ -611,7 +611,7 @@ This section is where you will present and interpret both simulation and experim
 
 Summarize the key trends from the parameter sweep:
 
-* How does the performance metric (e.g., ($v_x$)) change with the design parameter?
+* How does the performance metric e.g., $v_x$ change with the design parameter?
 * Is there a clear optimum or plateau?
 * Are there regions where the gait fails (e.g., no net forward motion, excessive slip, instability)?
 
