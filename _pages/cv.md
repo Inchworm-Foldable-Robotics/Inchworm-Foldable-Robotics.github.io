@@ -9,6 +9,12 @@ redirect_from:
 
 {% include base_path %}
 
+# Headding 1
+
+## Headding 2
+
+### Headding 3
+
 Education
 ======
 * Ph.D in Version Control Theory, GitHub University, 2018 (expected)
