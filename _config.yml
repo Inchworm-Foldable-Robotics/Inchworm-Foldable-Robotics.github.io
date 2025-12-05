@@ -23,14 +23,14 @@ repository               : "Inchworm-Foldable-Robotics/Inchworm-Foldable-Robotic
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "profile.png"
-  name             : "Your Sidebar Name"
+  avatar           : #"profile.png"
+  name             : "Inchworm Foldable Robotics"
   pronouns         : # example: "she/her"  
-  bio              : "Short biography for the left-hand sidebar"
-  location         : "Earth"
-  employer         : "Red Brick University"
+  bio              : "Driven by the principles of foldable robotics, this compact inchworm robot demonstrates how far creativity, clever mechanisms, and a single sheet of material can go."
+  location         : # "Earth"
+  employer         : "Arizona State University"
   uri              : # URL
-  email            : "none@example.org" 
+  email            : # "none@example.org" 
 
   # Academic websites
   academia         : # URL
@@ -57,7 +57,7 @@ author:
 
   # Social media
   artstation       : # Username
-  bluesky          : "bsky.app" # Replace this with you Bluesky username
+  bluesky          : # "bsky.app" # Replace this with you Bluesky username
   facebook         : # Username
   flickr           : # Username
   foursquare       : # Username
