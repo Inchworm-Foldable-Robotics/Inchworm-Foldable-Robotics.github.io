@@ -9,11 +9,10 @@ redirect_from:
 
 {% include base_path %}
 
-Education
+Insparation 
 ======
-* Ph.D in Version Control Theory, GitHub University, 2018 (expected)
-* M.S. in Jekyll, GitHub University, 2014
-* B.S. in GitHub, GitHub University, 2012
+![Mechanism Geometry](images/Inchworm1.png)
+
 
 Work experience
 ======
