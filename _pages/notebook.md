@@ -135,64 +135,107 @@ Below is a **sketch** of a parameterized XML template (in Python) for your model
 # This block defines a parameterized MuJoCo XML template as a Python string.
 # It will be formatted later with specific parameter values (stiffness, damping, friction, etc.).
 
-xml_template = r"""
+import os
+import mujoco
+import pandas
+import numpy as np
+import math
+import mediapy as media
+import matplotlib.pyplot as plt
+import imageio_ffmpeg
+from scipy import signal
+
+xml_template = '''
 <mujoco>
-  <option integrator="RK4" timestep="0.0005" gravity="0 0 -9.81"/>
-
-  <default>
-    <geom rgba="0.8 0.8 0.8 1" condim="3"/>
-    <joint damping="{joint_damping}" stiffness="{joint_stiffness}"/>
-  </default>
-
-  <worldbody>
-    <!-- Ground plane -->
-    <geom name="ground" type="plane" pos="0 0 0" size="5 5 0.1"
-          friction="{mu_base} 0 0"/>
-
-    <!-- Rear pad (anchor/slide pad) -->
-    <body name="foot_rear" pos="0 0 0.01">
-      <joint name="foot_rear_free" type="free"/>
-      <geom name="rear_pad" type="box" size="0.02 0.01 0.005"
-            friction="{mu_pad} 0 0" rgba="0 0.6 0 1"/>
-    </body>
-
-    <!-- Central body and front pad; simplified 2-link arch -->
-    <body name="body_mid" pos="0.05 0 0.02">
-      <joint name="mid_hinge" type="hinge" axis="0 1 0" pos="0 0 0"
-             springref="0" limited="true" range="-1.57 1.57"/>
-      <geom name="mid_link" type="box" size="0.05 0.01 0.005"
-            rgba="0.8 0 0 0.3"/>
-
-      <!-- Front link segment -->
-      <body name="body_front" pos="0.1 0 0">
-        <geom name="front_link" type="box" size="0.05 0.01 0.005"
-              rgba="0.8 0 0 0.3"/>
-
-        <!-- Front pad -->
-        <body name="foot_front" pos="0.05 0 0">
-          <geom name="front_pad" type="box" size="0.02 0.01 0.005"
-                friction="{mu_pad} 0 0" rgba="0 0.6 0 1"/>
+    <default>
+        <light castshadow="false" diffuse="1 1 1"/>
+        <camera fovy="45"/>
+    </default>
+     <!--<option><flag contact="disable"/></option>-->
+    <option integrator="RK4"/>
+    <option timestep="1e-4"/>
+    <option gravity="0 0 -9.81"/>
+    <worldbody>
+        <light name="top" pos="0 0 2"/>
+        <light name="top1" pos="1 0 2"/>
+        <light name="top2" pos="2 0 2"/>
+        <light name="top3" pos="3 0 2"/>
+        <light name="top4" pos="4 0 2"/>
+        <camera name="triangle" pos="7 0 .75" euler="90 90 0"/>
+        <camera name="triangle2" pos="-2 0 .05" euler="90 -90 0"/>
+        <camera name="iso" pos="-2 -3 3" euler="45 -45 -30"/>
+        <camera name="iso2" pos="10 -6 6" euler="45 45 30"/>
+        <geom name="ground" type="plane" pos="0 0 -.25" size="15 15 .05" rgba=".5 .5 .5 1" contype="2" conaffinity="1"/>
+        <body name="base_bot" pos="0 0 0" >
+            <joint type="free"/>
+            <geom type="box" size=".5 .5 .05" pos=".5 0 0" rgba="1 0 0 .25" mass=".1" contype="1" conaffinity="1" 
+            friction="{mu_base} 0.0 0.0"/>
+            <body name="foot1" pos="0 0 0">
+                 <geom type="box" size=".1 .25 .05" pos=".15 0 0" rgba="0 1 0 1" mass=".1" contype="1" conaffinity="1"
+                 friction="{mu_tape} 0.0 0.0"/>
+                 <joint name="foot1" type="hinge" axis="1 0 0" pos=".25 0 0"/>
+            </body>
         </body>
-      </body>
-
-      <!-- Site used to measure end-effector / COM position -->
-      <site name="ee_site" pos="0.15 0 0" size="0.005"/>
-    </body>
-  </worldbody>
-
-  <!-- Sensors for position and velocity at ee_site -->
-  <sensor>
-    <framepos name="ee_pos" site="ee_site"/>
-    <framevel name="ee_vel" site="ee_site"/>
-  </sensor>
-
-  <!-- Actuators controlling the mid hinge (servo-like) -->
-  <actuator>
-    <position name="mid_act" joint="mid_hinge"
-              kp="{actuator_kp}" kv="{actuator_kv}"/>
-  </actuator>
+        <body name="base_left" pos="0 .25 .433" quat=".866 -.5 0 0">
+            <joint type="free"/>
+            <geom type="box" size=".5 .5 .05" pos=".5 0 0" rgba="1 0 0 .15" mass="{mass}" contype="1" conaffinity="1"/>
+            <body name="first_left" pos="1 0 0" axisangle="0 1 0 -45">
+                <joint name="first_left" type="hinge" axis="0 1 0" pos="0 0 0" range="-45 45" stiffness="{k_joint}" damping="{b_joint}"/>
+                <geom type="box" size=".5 .5 .05" pos=".5 0 0" rgba="1 1 1 .25" mass="{mass}" contype="1" conaffinity="1"/>
+                <body name="second_left" pos="1 0 0" axisangle="0 1 0 90">
+                    <joint name="mid_left" type="hinge" axis="0 1 0" pos="0 0 0" range="-90 90" stiffness="{k_joint}" damping="{b_joint}"/>
+                    <geom type="box" size=".5 .5 .05" pos=".5 0 0" rgba=".5 .5 .5 .25" mass="{mass}" contype="1" conaffinity="1"/>
+                    <body name="tail_left" pos="1 0 0" axisangle="0 1 0 -45">
+                        <joint name="last_left" type="hinge" axis="0 1 0" pos="0 0 0" range="-45 45" stiffness="{k_joint}" damping="{b_joint}"/>
+                        <geom type="box" size=".5 .5 .05" pos=".5 0 0" rgba="1 0 0 .25" mass="{mass}" contype="1" conaffinity="1"/>
+                        <body name="tail_bot" pos="0 .25 -.433">
+                            <geom type="box" size=".5 .5 .05" pos=".5 0 0" rgba="1 0 0 .25" mass=".1" quat=".866 .5 0 0" 
+                            friction="{mu_base} 0.0 0.0" contype="1" conaffinity="1"/>
+                            <body name="end_effector" pos="1 -.375 .2165">
+                                <geom type="sphere" size=".1" pos="0 0 0" rgba="1 1 1 1" mass=".00001" contype="1" conaffinity="1"/>
+                            </body>
+                            <body name="foot2" pos="0 -.25 -.433" quat=".866 .5 0 0">
+                                <joint name="foot2" type="hinge" axis="1 0 0" pos=".55 .5 0"/>
+                                <geom type="box" size=".1 .25 .05" pos=".75 .5 0" rgba="0 1 0 1" mass=".1" 
+                                    contype="1" conaffinity="1" friction="{mu_tape} 0.0 0.0"/>
+                            </body>
+                        </body>
+                    </body>
+                </body>
+            </body>
+        </body>
+        <body name="base_right" pos="0 -.25 .433" quat=".866 .5 0 0">
+            <joint type="free"/>
+            <geom type="box" size=".5 .5 .05" pos=".5 0 0" rgba="1 0 0 .25" mass="{mass}" contype="1" conaffinity="1"/>
+            <body name="first_right" pos="1 0 0" axisangle="0 1 0 -45">
+                <joint name="first_right" type="hinge" axis="0 1 0" pos="0 0 0" range="-45 45" stiffness="{k_joint}" damping="{b_joint}"/>
+                <geom type="box" size=".5 .5 .05" pos=".5 0 0" rgba="1 1 1 .25" mass="{mass}" contype="1" conaffinity="1"/>
+                <body name="second_right" pos="1 0 0" axisangle="0 1 0 90">
+                    <joint name="mid_right" type="hinge" axis="0 1 0" pos="0 0 0" range="-90 90" stiffness="{k_joint}" damping="{b_joint}"/>
+                    <geom type="box" size=".5 .5 .05" pos=".5 0 0" rgba=".5 .5 .5 .25" mass="{mass}" contype="1" conaffinity="1"/>
+                    <body name="tail_right" pos="1 0 0" axisangle="0 1 0 -45">
+                        <joint name="last_right" type="hinge" axis="0 1 0" pos="0 0 0" range="-45 45" stiffness="{k_joint}" damping="{b_joint}"/>
+                        <geom type="box" size=".5 .5 .05" pos=".5 0 0" rgba="1 0 0 .25" mass="{mass}" contype="1" conaffinity="1"/>
+                    </body>
+                </body>
+            </body>
+        </body>
+    </worldbody>
+    <equality>
+        <weld body1="tail_bot" body2="tail_right"/>
+        <weld body1="tail_left" body2="tail_right"/>
+        <weld body1="base_bot" body2="base_left"/>
+        <weld body1="base_bot" body2="base_right"/>
+        <weld body1="base_left" body2="base_right"/>
+    </equality>
+    <actuator>
+        <position name="mid_act" joint="mid_left"  kp="2" kv="{b_motor}"/>
+        <position name="foot1" joint="foot1"  kp="{k_motor}" kv="{b_motor}"/>
+        <position name="foot2" joint="foot2"  kp="{k_motor}" kv="{b_motor}"/>
+    </actuator>
 </mujoco>
-"""
+'''
+
 ```
 
 **TODO:**
@@ -213,106 +256,60 @@ xml_template = r"""
 # 3) Run the time-stepping loop while applying a simple gait command,
 # 4) Record end-effector position over time for later analysis.
 
-import mujoco
-import numpy as np
-import math
-import matplotlib.pyplot as plt
+################## Period 4 seconds #########################
+xml = xml_template.format(k_motor = .5, # found through trial and error
+                          k_joint = 2.392e-3, # from assignment 5
+                          b_motor = 4.084e-6, # from RC servo data collection, most likely way off
+                          b_joint = 3.28e-6, # from assignment 5
+                          mu_tape = .856, # from assignment 5
+                          mu_base = .434, # from assignment 5
+                          mass = .005) # from assignment 5
 
-def build_model_xml(joint_stiffness, joint_damping,
-                    mu_pad, mu_base,
-                    actuator_kp, actuator_kv):
-    """Return a formatted XML string with the given model parameters."""
-    xml = xml_template.format(
-        joint_stiffness=joint_stiffness,
-        joint_damping=joint_damping,
-        mu_pad=mu_pad,
-        mu_base=mu_base,
-        actuator_kp=actuator_kp,
-        actuator_kv=actuator_kv,
-    )
-    return xml
+model = mujoco.MjModel.from_xml_string(xml)
+data = mujoco.MjData(model)
+mujoco.mj_resetData(model, data)
 
-def run_single_simulation(xml_string,
-                          gait_frequency_hz,
-                          duration_s=10.0,
-                          worm_amp_deg=45.0):
-    """
-    Run one simulation with a given gait frequency and return time + ee_site x-position.
-    The actuator is commanded as a square-wave position pattern.
+theta = 45 # Initial middle hinge value, 0 = middle
 
-    Parameters
-    ----------
-    xml_string : str
-        Complete MuJoCo XML description of the robot.
-    gait_frequency_hz : float
-        Frequency of the arching motion (Hz).
-    duration_s : float
-        Total simulation time (seconds).
-    worm_amp_deg : float
-        Peak amplitude of mid-hinge rotation (degrees).
-    """
-    # Create the model and data
-    model = mujoco.MjModel.from_xml_string(xml_string)
-    data = mujoco.MjData(model)
-    mujoco.mj_resetData(model, data)
+data.qpos[15] = -math.pi*theta/180 # Initial conditions on hinge joints only
+data.qpos[16] = 2*math.pi*theta/180
+data.qpos[17] = -math.pi*theta/180
+data.qpos[26] = -math.pi*theta/180
+data.qpos[27] = 2*math.pi*theta/180
+data.qpos[28] = -math.pi*theta/180
 
-    # Pre-compute control parameters
-    worm_amp_rad = np.deg2rad(worm_amp_deg)
-    omega = 2.0 * math.pi * gait_frequency_hz
+renderer = mujoco.Renderer(model)
+      
+wormAmp = np.deg2rad(90)
+footAmp = -np.deg2rad(90)
+freq = .25
+period = 1/freq
 
-    # Storage for results
-    time_history = []
-    x_history = []
+frames = []
+duration = 25 # (seconds)
+framerate = 20 # (Hz)
 
-    # Main simulation loop
-    while data.time < duration_s:
-        t = data.time
+eepos4 = []
+time = []
 
-        # Simple square-wave gait: +/- worm_amp_rad
-        # duty cycle 50%, zero-mean, phase aligned with time
-        phase = math.sin(omega * t)
-        target_angle = worm_amp_rad * np.sign(phase)
+while data.time < duration:
 
-        # First actuator (mid_act) is assumed to be index 0 in data.ctrl
-        data.ctrl[0] = target_angle
+    data.ctrl[0] = wormAmp*(signal.square(freq*2*math.pi*(data.time+(period/4)), duty=.5)+1)/2
+    data.ctrl[1] = footAmp*(signal.square(freq*2*math.pi*data.time, duty=.5)+1)/2
+    data.ctrl[2] = footAmp*(signal.square(freq*2*math.pi*(data.time+(period/2)), duty=.5)+1)/2
+    
+    mujoco.mj_step(model, data)
+    
+    if len(frames) < data.time * framerate:
+        renderer.update_scene(data, "iso2")
+        pixels = renderer.render()
+        frames.append(pixels)
+        eepos4.append(data.body('end_effector').xpos[0])
+        time.append(data.time)
+        #print(100*len(frames)/(framerate*duration),"%")
 
-        # Advance simulation by one step
-        mujoco.mj_step(model, data)
-
-        # Record time and x-position of ee_site
-        ee_pos = data.site('ee_site').xpos  # 3D position of the site
-        time_history.append(t)
-        x_history.append(ee_pos[0])        # x-component
-
-    return np.array(time_history), np.array(x_history)
-
-# Example usage (placeholder values for parameters)
-# TODO: Replace with your final parameters from Assignment 5 and build script.
-xml = build_model_xml(
-    joint_stiffness=0.3,   # [N·m/rad] placeholder
-    joint_damping=0.02,    # [N·m·s/rad] placeholder
-    mu_pad=0.8,            # anchor friction (placeholder)
-    mu_base=0.2,           # sliding friction (placeholder)
-    actuator_kp=2.0,       # actuator stiffness (placeholder)
-    actuator_kv=0.01       # actuator damping (placeholder)
-)
-
-t_sim, x_sim = run_single_simulation(
-    xml_string=xml,
-    gait_frequency_hz=0.35,
-    duration_s=10.0,
-    worm_amp_deg=45.0
-)
-
-# Quick diagnostic plot of end-effector x-position vs time
-plt.figure()
-plt.plot(t_sim, x_sim)
-plt.xlabel("Time [s]")
-plt.ylabel("End-effector x [m]")
-plt.title("Single Simulation: End-effector x-position vs time")
-plt.grid(True)
-plt.tight_layout()
-plt.show()
+plt.imshow(frames[0])
+plt.axis('off')
 ```
 
 **TODO:**
