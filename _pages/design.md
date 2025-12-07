@@ -67,13 +67,21 @@ Version 1 represented the team’s first attempt to translate the inchworm gait 
 
 Since V1 existed only as a digital assembly in SolidWorks, it did not include actuators or physical hinges. Instead, simple mate constraints were used to demonstrate the basic horizontal fold unfold motion envisioned for the mechanism. The model relied on mated edges rather than true joint definitions, reflecting its role as a conceptual layout rather than a manufacturable system.
 
-The design incorporated box-shaped end segments, chosen under the early assumption that rectangular volumes would simplify mounting internal components. Small pad like features were added at the corners of these boxes to act as placeholders for future high friction anchoring feet. At this stage, the intent was only to visualize the anchoring locations, not to engineer their mechanics.
+The design incorporated box shaped end segments, chosen under the early assumption that rectangular volumes would simplify mounting internal components. Small pad like features were added at the corners of these boxes to act as placeholders for future high friction anchoring feet. At this stage, the intent was only to visualize the anchoring locations, not to engineer their mechanics.
 
 The motion captured in V1 was intentionally simple: a single fold–unfold action at the center of the mechanism. However, this initial configuration exposed several important limitations. The team quickly recognized that using three moving flaps created unnecessary complexity and would complicate actuation and control. Additionally, concerns emerged regarding structural rigidity maintaining a stiff box structure using a five layer foldable material appeared challenging without resorting to full 3D printed components, which did not align with the project’s fabrication goals.
 
 The key lesson from V1 was the need to simplify. The mechanism was larger than necessary, contained too many moving elements, and did not align well with the desired material constraints. Around this stage, the team began running early simulations, which confirmed that reducing the system to two primary hinges would create more predictable kinematics and eliminate unwanted nonlinearities in the motion. These insights directly guided the transition toward a more refined, compact, and mechanically efficient version of the design.
 
+# V2
 
+Version 2 marked the team’s transition into the new triangular architecture that would ultimately define the mechanism’s kinematics. The purpose of this iteration was to move away from the box based geometry of V1 and adopt the symmetric triangular form that more accurately represented the desired arching behavior. This shift was necessary to establish a stable baseline for upcoming MuJoCo simulations and to validate the simplified motion pathway envisioned for the mechanism.
+
+The most significant change in V2 was the replacement of rectangular body segments with equal sided triangular panels. This geometry eliminated the bulkiness of the V1 design and created a cleaner, more consistent fold pattern. The team also removed the placeholder feet at this stage, choosing to focus solely on refining the body geometry before reintroducing anchoring features in later versions.
+
+Within SolidWorks, V2 was used to verify that the fold unfold motion remained similar to that of V1 despite the change in structure. The design successfully maintained the intended motion profile, demonstrating that the simplified two flap configuration could produce the same basic kinematic behavior with fewer moving parts. This reduction aligned with the team’s goal of improving reliability fewer joints reduce mechanical failure modes and simplify control.
+
+No major issues were identified during the development of V2. Instead, this version served as an effective stepping stone, confirming that the triangular layout was compatible with the desired motion and would be suitable for more advanced modeling. With these results, the team was able to proceed confidently toward V3, where more detailed hinge mechanics, structural considerations, and actuation strategies would be incorporated.
 
 # Insparation 
 
