@@ -6,6 +6,7 @@ redirect_from:
   - /about/
   - /about.html
 ---
+<img src='..\assets\01_Home\Inch_Worm.jpg'>  
 
 ## Team and Project Overview
 
