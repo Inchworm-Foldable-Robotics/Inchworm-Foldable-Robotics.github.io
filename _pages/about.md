@@ -11,15 +11,15 @@ redirect_from:
 
 This site documents the semester project for RAS 557: Foldable Robotics (Fall 2025, instructor: Daniel M. Aukes). The course focuses on bio‑inspired terrestrial locomotion, foldable fabrication methods, and simulation‑driven design.
 
-The project investigates an inchworm‑inspired crawling robot based on the locomotion of Manduca sexta larvae. The robot uses rigid foldable linkages and friction‑modulated pads to reproduce the characteristic looped, two‑anchor gait of an inchworm in a planar setting. The long‑term objective is to develop a foldable, repeatable platform where geometry, actuation, and contact properties can be systematically varied and compared between simulation and experiment.
+The project investigates an inchworm‑inspired crawling robot based on the locomotion of [Manduca sexta larvae](https://en.wikipedia.org/wiki/Manduca_sexta). The robot uses rigid foldable linkages and friction‑modulated pads to reproduce the characteristic looped, two‑anchor gait of an inchworm in a planar setting. The long‑term objective is to develop a foldable, repeatable platform where geometry, actuation, and contact properties can be systematically varied and compared between simulation and experiment.
 
 The project team consists of:
 
-- Sai Srinivas Tatwik Meesala  
-- Colin Fricke  
+- [Sai Srinivas Tatwik Meesala](https://tatwik19.github.io/)
+- [Colin Fricke](https://www.linkedin.com/in/colin-fricke)
 - Nathan Vairora  
 
-Together, the team is responsible for mechanism design, dynamic modeling in MuJoCo, parameter studies, and experimental validation, with this website serving as the primary public report for both Project Assignment 1 and Project Assignment 2. :contentReference[oaicite:0]{index=0}
+Together, the team is responsible for mechanism design, dynamic modeling in MuJoCo, parameter studies, and experimental validation.
 
 
 ## Team Goals
@@ -48,7 +48,7 @@ Within this project, “candidate” refers to the specific combination of:
 
 - Biological inspiration: Manduca sexta inchworm gait (two anchors, looping contraction and extension).
 - Mechanical mechanism: a planar rigid‑link crawler with two gripping pads and an internal linkage network that converts actuator stroke into coordinated lift and translation.
-- Fabrication approach: laser‑cut or otherwise patterned laminate structure compatible with the foldable robotics workflow used in the course. :contentReference[oaicite:2]{index=2}
+- Fabrication approach: laser‑cut or otherwise patterned laminate structure compatible with the foldable robotics workflow used in the course. 
 
 For Project Assignment 1, the team selected a candidate mechanism that approximates the inchworm’s deformable body using a small number of rigid links and hinges. The current concept uses:
 
@@ -97,8 +97,7 @@ Existing work on inchworm and caterpillar locomotion provides the biological and
 
 On the robotics side, several inchworm‑style mechanisms have been proposed, including modular rigid crawlers, cable‑driven climbers, and soft crawling robots. Many of these systems implement the same fundamental pattern: two or more anchors with alternating high/low friction states and a central actuation unit that drives contraction and extension. Analytical models of slider–crank‑based crawlers provide direct relationships between link geometry and stride distance, while more recent soft‑robotic designs emphasize friction modulation and energy efficiency.
 
-Project Assignment 1 synthesized these sources into a set of target specifications and a kinematic mechanism concept for a foldable inchworm‑style crawler. :contentReference[oaicite:3]{index=3}
-
+Project Assignment 1 synthesized these sources into a set of target specifications and a kinematic mechanism concept for a foldable inchworm‑style crawler.
 
 ### Collecting Design Criteria
 
@@ -155,7 +154,7 @@ These metrics will be linked to a specification table that records design‑scal
 
 At the current stage:
 
-- Project Assignment 1 is complete. The team has selected the inchworm‑inspired candidate, performed a focused literature review, defined preliminary performance targets, developed a kinematic model and Jacobian for the proposed mechanism, and drafted an initial specifications table. :contentReference[oaicite:6]{index=6}
+- Project Assignment 1 is complete. The team has selected the inchworm‑inspired candidate, performed a focused literature review, defined preliminary performance targets, developed a kinematic model and Jacobian for the proposed mechanism, and drafted an initial specifications table.
 - A paper prototype and mechanism sketches have been created to validate the basic lift‑and‑drag motion and to check qualitative feasibility of the linkage topology within foldable fabrication constraints.
 - The public website structure is in place using the AcademicPages Jekyll template, and this “About” page serves as the top‑level entry point for the project. 
 
