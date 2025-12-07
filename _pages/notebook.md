@@ -205,7 +205,7 @@ xml_template = '''
         <weld body1="base_left" body2="base_right"/>
     </equality>
     <actuator>
-        <position name="mid_act" joint="mid_left"  kp="2" kv="{b_motor}"/>
+        <position name="mid_act" joint="mid_left"  kp="{k_motor}" kv="{b_motor}"/>
         <position name="foot1" joint="foot1"  kp="{k_motor}" kv="{b_motor}"/>
         <position name="foot2" joint="foot2"  kp="{k_motor}" kv="{b_motor}"/>
     </actuator>
@@ -222,7 +222,7 @@ xml_template = '''
 # This block is the creation of the simulation for the Mujoco model, at a specified period of 4 seconds. It is repeated for all periods tested, but the repeat code will not be shown for brevity. A .gif of the simulation will play at the bottom.
 
 ################## Period 4 seconds #########################
-xml = xml_template.format(k_motor = .5, # found through trial and error
+xml = xml_template.format(k_motor =15.42, # found through trial and error
                           k_joint = 2.392e-3, # from assignment 5
                           b_motor = 4.084e-6, # from RC servo data collection, most likely way off
                           b_joint = 3.28e-6, # from assignment 5
@@ -363,10 +363,11 @@ Summarizing the likely reasons for discrepancies between simulation and experime
   * Simplified link shapes vs real folded shell geometry.
   * Unmodeled mass distribution (e.g., wires, connectors).
   * Scaling inconsistencies while building the model.
+  * One big issue that we kept facing during the attempts to make the model follow the desired gate was having the middle hinge actuation fully extend and retract every time. The issue, especially present in the .5s period simulation, is the lack of any actuation from that middle joint. This was unable to be solved before the due date of this project.
 * **Compliance modeling:**
 
   * Single torsional spring vs distributed flexure behavior.
-  * Bad RC Servo creating incorrect stiffness and damping paramters for the actuator.
+  * Bad RC Servo paramterization, creating incorrect stiffness and damping values for the actuator.
   * Nonlinear stiffness or hysteresis not included.
 * **Contact and friction:**
 
