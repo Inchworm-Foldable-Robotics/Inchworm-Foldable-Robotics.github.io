@@ -7,7 +7,73 @@ redirect_from:
   - /resume
 ---
 
-{% include base_path %}
+Pre Design Concepts
+======
+Before beginning any mechanical design work, we studied how inchworms generate motion and how previous robots have abstracted that gait into linkage based mechanisms. The three reference images (Inchworm Design 1–3) guided this explanation.
+
+
+1. Biological Gait Analysis
+The first image (Inchworm1) shows the natural inchworm motion cycle:
+
+
+* The rear end anchors,
+
+
+* The body arches upward,
+
+
+* The front end extends forward and anchors,
+
+
+* The rear releases and follows.
+
+
+This sequence highlighted two key principles we needed to replicate mechanically: alternating anchoring and body arching that converts vertical motion into forward displacement.
+
+
+2. Robotic Gait Diagrams and Joint Behavior
+The second image (Inchworm2) presents a simplified kinematic interpretation of this gait. It shows how a small number of joints can recreate the arch extend reset pattern through controlled rotation. The diagram specifically illustrates:
+
+
+* How angles between segments open and close during the stride,
+
+
+* How one end remains fixed while the other swings forward,
+
+
+* How joint states (free vs. locked) determine which segment acts as the anchor.
+
+
+From this, we concluded that the mechanism could be reduced to a central folding joint and two end segments serving as controllable anchors.
+
+
+3. Geometric Parameters and Link Length Relationships
+The third image (Inchworm3) shows a parametric sketch of a linkage based inchworm mechanism, introducing variables such as link lengths, hinge angles, and stride geometry. This diagram made clear that:
+
+
+* Stride length is directly determined by linkage geometry,
+
+
+* the maximum and minimum hinge angles define lift height and extension,
+
+
+* a triangular or folded shape naturally produces the required arching motion.
+
+
+This confirmed that a triangular foldable structure with one actuated hinge could reproduce the biological gait while remaining easy to fabricate from sheet materials.
+
+# V1
+Version 1 represented the team’s first attempt to translate the inchworm gait into a mechanical form. The purpose of this initial model was not to create a functional prototype, but rather to establish a shared understanding of scale, geometry, and intended motion before progressing into detailed design. V1 served as a communication tool, ensuring that all team members aligned on the overall structure and spatial requirements of the mechanism.
+
+Since V1 existed only as a digital assembly in SolidWorks, it did not include actuators or physical hinges. Instead, simple mate constraints were used to demonstrate the basic horizontal fold unfold motion envisioned for the mechanism. The model relied on mated edges rather than true joint definitions, reflecting its role as a conceptual layout rather than a manufacturable system.
+
+The design incorporated box-shaped end segments, chosen under the early assumption that rectangular volumes would simplify mounting internal components. Small pad like features were added at the corners of these boxes to act as placeholders for future high friction anchoring feet. At this stage, the intent was only to visualize the anchoring locations, not to engineer their mechanics.
+
+The motion captured in V1 was intentionally simple: a single fold–unfold action at the center of the mechanism. However, this initial configuration exposed several important limitations. The team quickly recognized that using three moving flaps created unnecessary complexity and would complicate actuation and control. Additionally, concerns emerged regarding structural rigidity maintaining a stiff box structure using a five layer foldable material appeared challenging without resorting to full 3D printed components, which did not align with the project’s fabrication goals.
+
+The key lesson from V1 was the need to simplify. The mechanism was larger than necessary, contained too many moving elements, and did not align well with the desired material constraints. Around this stage, the team began running early simulations, which confirmed that reducing the system to two primary hinges would create more predictable kinematics and eliminate unwanted nonlinearities in the motion. These insights directly guided the transition toward a more refined, compact, and mechanically efficient version of the design.
+
+
 
 # Insparation 
 
