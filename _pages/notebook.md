@@ -315,7 +315,7 @@ plt.axis('off')
 ---
 
 ![Screenshot of the MuJoCo inchworm model highlighting bodies, joints, and contact pads]()
-<img src = '..\assets\04_Results\inchwormcrawlP4.gif' width="600" height="400">
+<img src='..\assets\04_Results\inchworm_crawlP4.gif' width="600" height="400">
 *Figure 1. MuJoCo model schematic showing the inchworm-inspired crawler, body segments, and friction pads.
 
 ---
