@@ -3,36 +3,30 @@ layout: archive
 title: "Jupyter Notebook"
 permalink: /notebook/
 author_profile: true
-redirect_from:
-  - /resume
+# redirect_from:
+#   - /resume
 ---
 
 ---
 
 # Development of the Model
 
-This section documents how the inchworm-inspired foldable robot was converted from the Assignment 1 kinematic concept into a dynamic MuJoCo model with compliance, actuators, and sensors, following the expectations of Project Assignment 2.
+This section documents how the inchworm-inspired foldable robot was converted from the Assignment 1 kinematic concept into a dynamic MuJoCo model with compliance, actuators, and performance tracking, following the expectations of Project Assignment 2.
 
 ---
 
 ## 1.1 Robot Overview and Objectives
 
-The robot is a Manduca sexta–inspired inchworm crawler with two friction-modulated pads and a central body that arches and extends to achieve lift–drag locomotion.
+The robot is a Sarrus linkage inchworm crawler with two friction-modulated pads and a central body that retracts and extends to achieve lift–drag locomotion.
 
 * **Biological inspiration:** looping, two-anchor gait with alternating front/rear grip.
-* **Scale and target metrics (from Assignment 1, to be confirmed):**
 
-  * Body length $$L \approx 100\,\text{mm}$$  
-  * Target stride $$S \approx 0.25L$$
-  * Target average speed $$v \approx 10\ \text{mm/s}$$
-  * Friction ratio $$\mu_\text{anchor} / \mu_\text{slide} \gtrsim 3$$ 
 * **This model’s purpose:**
 
   * Capture the robot’s planar dynamics (forward motion + arching).
   * Include joint stiffness/damping and actuator dynamics.
   * Provide a platform for parameter sweeps and sim-to-real comparison.
 
-**TODO:** Replace the bullet list above with the final numbers and language from your Assignment 1 report.
 
 ---
 
@@ -42,17 +36,16 @@ The MuJoCo model is organized around a small set of rigid bodies and joints:
 
 * **Rigid bodies:**
 
-  * Front pad (foot A)
-  * Rear pad (foot B)
-  * Central body links (e.g., 2–3 segments forming an arch)
+  * Front pad (foot 1)
+  * Rear pad (foot 2)
+  * Central body links 
 * **Joints:**
 
-  * Hinge joints at mid-body to create arching.
-  * Optional hinge joints between pads and body segments.
+  * Hinge joints at mid-body to create the Sarrus linkage.
+  * Servo joints between pads and body segments.
 * **Contacts and friction:**
 
-  * Distinct friction coefficients for pad–ground vs body–ground.
-  * Contact geometry chosen to approximate real pad sizes.
+  * Distinct friction coefficients for pad–ground vs body–ground found via experimentation
 
 A simple summary table for the model elements:
 
@@ -63,7 +56,7 @@ A simple summary table for the model elements:
 | body         | `foot2`    | Rear pad with low friction states  | 
 | joint        | `mid_left`, `mid_right`    | Main arching hinge (compliant)          | 
 | joint        | `foot1` | Pad pivot                    | 
-| joint        | `foot2`  | Pad pivot (if used)                     | 
+| joint        | `foot2`  | Pad pivot                     | 
 | body         | `end_effector`      |  COM tracking site      | 
 | geom         | `ground`       | Ground plane                            |
 
@@ -93,8 +86,8 @@ The dynamic model includes both structural compliance and actuator dynamics.
 
   * Different `friction` parameters for:
 
-    * Foot geoms $$high (\mu_\text{anchor})$$.
-    * Base geoms $$low (\mu_\text{slide})$$.
+    * Foot geoms $$low (\mu_\text{tape})$$.
+    * Base geoms $$high (\mu_\text{base})$$.
   * Values based on friction experiment (Assignment 5). 
 
 
@@ -102,28 +95,21 @@ The dynamic model includes both structural compliance and actuator dynamics.
 
 ## 1.4 Sensing and Performance Metric Definition
 
-To support parameter studies, the model must expose measurable signals.
 
-* **Sites and sensors:**
+* **Site:**
 
-  * A `site` is attached to either:
-
-    * The end-effector body (e.g., front pad) or
-    * Approximate center-of-mass body.
-  * A `framepos` or `framevel` sensor is used to read the position/velocity of this site.
-* **Performance metric (example):**
+  * The site on this model is the `end_effector`body in the middle of the "head" of the inchworm. This position allows us to track the position of this geom over time and plot it to see how it moves during the simulation.
+* **Performance metric:**
 
   * Average forward speed:
     $$
     v_x = \frac{x_\text{final} - x_\text{initial}}{T_\text{sim}}
     $$
-  * Optionally: distance per cycle, cost of transport, or power-per-distance.
+  * This variable makes sense as a metric of performance for the inchworm, as it demonstrates how effective it is at moving forward.
 
 ---
 
-## 1.5 MuJoCo XML Template (Parameterizable)
-
-Below is a **sketch** of a parameterized XML template (in Python) for your model. It shows how to expose design parameters such as joint stiffness, damping, and friction. The geometry is deliberately simplified; adapt it to your final linkage design.
+## 1.5 MuJoCo XML Template 
 
 ```python
 # This block defines a parameterized MuJoCo XML template as a Python string.
@@ -232,23 +218,12 @@ xml_template = '''
 
 ```
 
-**TODO:**
-
-* Replace the simple 2-link model above with your final Manduca-style linkage (Sarrus/four-bar hybrid).
-* Add additional joints and actuators if your mechanism uses more than one DOF.
-* Incorporate any weld constraints or equality constraints used in your Assignment 1 model.
-
 ---
 
 ## 1.6 Python: Loading and Running a Single Simulation
 
 ```python
-# This block loads the parameterized MuJoCo model and runs a single simulation.
-# It demonstrates how to:
-# 1) Format the XML with specific parameter values,
-# 2) Create the model and data structures,
-# 3) Run the time-stepping loop while applying a simple gait command,
-# 4) Record end-effector position over time for later analysis.
+# This block is the creation of the simulation for the Mujoco model, at a specified period of 4 seconds. It is repeated for all periods tested, but the repeat code will not be shown for brevity. A .gif of the simulation will play at the bottom.
 
 ################## Period 4 seconds #########################
 xml = xml_template.format(k_motor = .5, # found through trial and error
@@ -302,298 +277,95 @@ while data.time < duration:
         time.append(data.time)
         #print(100*len(frames)/(framerate*duration),"%")
 
-plt.imshow(frames[0])
-plt.axis('off')
+media.set_ffmpeg(imageio_ffmpeg.get_ffmpeg_exe())
+media.show_video(frames, fps = framerate)
 ```
 
 ---
 
-![Screenshot of the MuJoCo inchworm model highlighting bodies, joints, and contact pads]()
+![]()
 <img src='..\assets\04_Results\inchworm_crawlP4.gif' width="600" height="400">  
-*Figure 1. MuJoCo model schematic showing the inchworm-inspired crawler, body segments, and friction pads.
+
+*Figure 1. MuJoCo model schematic showing the inchworm crawling at a period of 4 seconds*
+
+### Repeated code for a period of 2 seconds
+
+![]()
+<img src='..\assets\04_Results\inchworm_crawlP2.gif' width="600" height="400">  
+
+*Figure 2. MuJoCo model schematic showing the inchworm crawling at a period of 2 seconds*
+
+### Period of 1 second
+
+![]()
+<img src='..\assets\04_Results\inchworm_crawlP1.gif' width="600" height="400">  
+
+*Figure 3. MuJoCo model schematic showing the inchworm crawling at a period of 1 second*
+
+### Period of .5 seconds
+
+![]()
+<img src='..\assets\04_Results\inchworm_crawlP_5.gif' width="600" height="400">  
+
+*Figure 4. MuJoCo model schematic showing the inchworm crawling at a period of .5 seconds*
+
+This sweep of the independent parameter highlights the optimized gait period in the simulation
 
 ---
 
-# Model Optimization / Parameter Study
+## 1.7 Plotting Simulation Results
 
-This section describes how the dynamic model is used to explore how performance depends on key design parameters, and how the same variation is implemented experimentally.
-
----
-
-## 2.1 Design Parameters and Performance Metric
-
-**Candidate design parameters** (choose one primary, optionally a secondary):
-
-* **Gait frequency / cycle period**:
-
-  * Parameter: (f) [Hz] or period $$T = 1/f$$.
-  * Motivation: affects stride length and slip.
-* **Joint stiffness (k_\theta)**:
-
-  * Parameter: flexure stiffness (N·m/rad).
-  * Motivation: trade-off between energy storage, controllability, and arching amplitude.
-* **Pad friction $$\mu_\text{anchor} / \mu_\text{slide}$$**:
-
-  * Parameter: friction ratio via material choice or pad normal load.
-  * Motivation: determines net thrust vs slip.
-
-**Primary performance metric (example):**
-
-* Average forward speed:  
-  $$
-  v_x = \frac{x_\text{end} - x_\text{start}}{T_\text{sim}}
-  $$
-* Secondary metrics (if needed):
-
-  * Distance per cycle.
-  * Mechanical work per distance (cost of transport).
-  * Maximum payload while maintaining (v_x) within tolerance.
-
-**TODO:**
-
-* Explicitly state the final parameter(s) you chose to vary and why.
-* Define the simulation duration and number of gait cycles used for metric computation.
-
----
-
-## 2.2 Helper Function: Compute Performance for One Parameter Value
+Below is a simple plot of the x poisiton of the end effector on the inchworm over time, to see how it reacts for different gait periods
 
 ```python
-# This block wraps a single simulation + metric computation into one function.
-# It:
-# 1) Builds the XML for a given parameter value,
-# 2) Runs the simulation,
-# 3) Computes average forward speed vx,
-# 4) Returns vx and any other quantities of interest.
-
-def evaluate_design_parameter(param_value,
-                              param_name="gait_frequency_hz",
-                              duration_s=10.0):
-    """
-    Evaluate performance for one parameter value.
-
-    Parameters
-    ----------
-    param_value : float
-        Value of the design parameter (e.g. gait frequency in Hz or joint stiffness).
-    param_name : str
-        Which parameter is being varied. Used to route param_value.
-        Examples: "gait_frequency_hz", "joint_stiffness".
-    duration_s : float
-        Simulation duration (s).
-
-    Returns
-    -------
-    metrics : dict
-        Dictionary containing:
-        - 'param_value': numeric parameter value
-        - 'vx_avg': average forward speed
-        - 'x_start', 'x_end': initial and final x position
-        - 't_end': total simulated time
-    """
-    # Base parameters (TODO: replace with final values)
-    joint_stiffness = 0.3
-    joint_damping = 0.02
-    mu_pad = 0.8
-    mu_base = 0.2
-    actuator_kp = 2.0
-    actuator_kv = 0.01
-
-    # Route the parameter value into the model or gait timing
-    if param_name == "joint_stiffness":
-        joint_stiffness = param_value
-        gait_frequency_hz = 0.35  # fixed
-    elif param_name == "gait_frequency_hz":
-        gait_frequency_hz = param_value
-    else:
-        raise ValueError(f"Unknown param_name: {param_name}")
-
-    # Build XML with updated parameters
-    xml = build_model_xml(
-        joint_stiffness=joint_stiffness,
-        joint_damping=joint_damping,
-        mu_pad=mu_pad,
-        mu_base=mu_base,
-        actuator_kp=actuator_kp,
-        actuator_kv=actuator_kv
-    )
-
-    # Run simulation
-    t, x = run_single_simulation(
-        xml_string=xml,
-        gait_frequency_hz=gait_frequency_hz,
-        duration_s=duration_s,
-        worm_amp_deg=45.0
-    )
-
-    # Compute performance metric (average speed)
-    x_start = x[0]
-    x_end = x[-1]
-    t_end = t[-1]
-    vx_avg = (x_end - x_start) / t_end
-
-    metrics = {
-        "param_value": param_value,
-        "vx_avg": vx_avg,
-        "x_start": x_start,
-        "x_end": x_end,
-        "t_end": t_end,
-    }
-    return metrics
-```
-
----
-
-## 2.3 Parameter Sweep Loop
-
-```python
-# This block performs a global sweep over a list of parameter values.
-# It:
-# 1) Defines a list of parameter values to test,
-# 2) Calls evaluate_design_parameter() for each,
-# 3) Stores the resulting metrics in arrays for plotting.
-
-def sweep_parameter(param_values,
-                    param_name="gait_frequency_hz",
-                    duration_s=10.0):
-    """
-    Run a parameter sweep and collect metrics.
-
-    Parameters
-    ----------
-    param_values : array-like
-        List or array of parameter values to test.
-    param_name : str
-        Name of the parameter being swept.
-    duration_s : float
-        Simulation duration for each run.
-
-    Returns
-    -------
-    param_values_out : np.ndarray
-        Parameter values as tested.
-    vx_avg_out : np.ndarray
-        Corresponding average forward speeds.
-    """
-    vx_list = []
-    param_list = []
-
-    for val in param_values:
-        print(f"Running simulation for {param_name} = {val}")
-        metrics = evaluate_design_parameter(
-            param_value=val,
-            param_name=param_name,
-            duration_s=duration_s
-        )
-        param_list.append(metrics["param_value"])
-        vx_list.append(metrics["vx_avg"])
-
-    return np.array(param_list), np.array(vx_list)
-
-# Example sweep over gait frequency from 0.1 to 1.0 Hz
-# TODO: choose ranges based on your actuator capabilities and desired speeds.
-param_values = np.linspace(0.1, 1.0, 6)  # [0.1, 0.28, ..., 1.0] Hz
-param_name = "gait_frequency_hz"
-
-param_vals_sim, vx_sim = sweep_parameter(
-    param_values=param_values,
-    param_name=param_name,
-    duration_s=10.0
-)
-```
-
----
-
-## 2.4 Plotting Simulation Results
-
-```python
-# This block plots the performance metric (e.g. average speed) vs. parameter value.
-# It:
-# 1) Uses arrays from sweep_parameter(),
-# 2) Produces a figure suitable for direct inclusion on the project website,
-# 3) Identifies the "best" parameter value according to vx_avg.
-
-plt.figure()
-plt.plot(param_vals_sim, vx_sim, marker="o")
-plt.xlabel("Gait frequency [Hz]")  # TODO: update label if parameter is different
-plt.ylabel("Average forward speed v_x [m/s]")
-plt.title("Simulation: Performance vs. gait frequency")
+plt.plot(time,eepos4)
+plt.xlabel("Time [s]")
+plt.ylabel("X position of end effector")
+plt.title("Tracking End Effector Position over time. Period 4s")
 plt.grid(True)
-plt.tight_layout()
-plt.show()
-
-# Identify the best parameter (max speed)
-best_idx = np.argmax(vx_sim)
-best_param = param_vals_sim[best_idx]
-best_speed = vx_sim[best_idx]
-print(f"Best {param_name} = {best_param:.3f} Hz, v_x = {best_speed:.4f} m/s")
-
-# TODO: copy this information into your Results section once finalized.
 ```
 
 ---
+### Period of 4 seconds
 
-![Line plot of average forward speed vs. gait frequency, highlighting the optimal value](path/to/sim_speed_vs_frequency.png)
-*Figure 2. Example of performance metric (average forward speed) vs. gait frequency from simulation. TODO: replace with your actual plot.*
+![](..\assets\04_Results\SimP4.png)  
 
----
+*Figure 5. Tracking data of the inchworm crawling at a period of 4 seconds*
 
-## 2.5 Optional: Fine-Grained Search / Optimization
+### Period of 2 seconds
 
-If you find a promising region in the sweep, you can refine with a narrower search or an optimizer.
+![](..\assets\04_Results\SimP2.png)  
 
-```python
-# This block performs a second sweep around the best parameter to refine the optimum.
-# It is a simple "zoom-in" approach instead of fully general optimization.
+*Figure 6. Tracking data of the inchworm crawling at a period of 2 seconds*
 
-def refine_parameter_search(best_param,
-                            window=0.2,
-                            num_points=5,
-                            param_name="gait_frequency_hz",
-                            duration_s=10.0):
-    """
-    Refine the parameter search around the current best value.
+### Period of 1 second
 
-    Parameters
-    ----------
-    best_param : float
-        Previously identified best parameter value.
-    window : float
-        Half-width of the refinement interval around best_param.
-    num_points : int
-        Number of samples in the refinement interval.
-    """
-    lower = max(0.0, best_param - window)
-    upper = max(lower + 1e-3, best_param + window)
-    param_values_refined = np.linspace(lower, upper, num_points)
+![](..\assets\04_Results\SimP1.png)  
 
-    return sweep_parameter(
-        param_values=param_values_refined,
-        param_name=param_name,
-        duration_s=duration_s
-    )
+*Figure 7. Tracking data of the inchworm crawling at a period of 1 second*
 
-# Example refinement (TODO: only run after you have a first-pass optimum)
-# param_vals_refined, vx_refined = refine_parameter_search(
-#     best_param=best_param,
-#     window=0.1,
-#     num_points=7,
-#     param_name=param_name,
-#     duration_s=10.0
-# )
-```
+### Period of .5 seconds
 
-**TODO:** Decide whether you need this refinement or if a coarse sweep is sufficient for Assignment 2.
+![](..\assets\04_Results\SimP_5.png)  
+
+*Figure 8. Tracking data of the inchworm crawling at a period of .5 seconds*
+
+### Combination plot of all periods
+
+![](..\assets\04_Results\SimPAll.png)  
+
+*Figure 9. Tracking data of the inchworm crawling at all periods for comparison*
+
 
 ---
 
 # Results, Summary, and Discussion
 
-This section is where you will present and interpret both simulation and experimental results, compare them, and discuss the sim-to-real gap. It mirrors the expectations of the Project Assignment 2 report and video. 
+This section is where you will present and interpret the simulation results.
 
 ---
 
-## 3.1 Simulation Results
+## 2.1 Simulation Results
 
 Summarize the key trends from the parameter sweep:
 
@@ -617,7 +389,7 @@ Summarize the key trends from the parameter sweep:
 
 ---
 
-![Simulation snapshots of the inchworm model at different phases of the gait](path/to/sim_snapshots.png)
+![Simulation snapshots of the inchworm model at different phases of the gait](path/to/sim_snapshots.png)  
 *Figure 3. Simulation snapshots over one gait cycle, showing lift–drag locomotion for a representative parameter setting. TODO: render and capture images from MuJoCo.*
 
 ---
