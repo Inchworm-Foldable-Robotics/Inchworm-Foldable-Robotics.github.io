@@ -56,18 +56,16 @@ The MuJoCo model is organized around a small set of rigid bodies and joints:
 
 A simple summary table for the model elements:
 
-| Element type | Name (example) | Description                             | Notes / TODO                |
-| ------------ | -------------- | --------------------------------------- | --------------------------- |
-| body         | `body_mid`     | Central body segment(s)                 | TODO: length, mass          |
-| body         | `foot_front`   | Front pad with high/low friction states | TODO: size, friction values |
-| body         | `foot_rear`    | Rear pad with high/low friction states  | TODO                        |
-| joint        | `mid_hinge`    | Main arching hinge (compliant)          | TODO: stiffness, damping    |
-| joint        | `foot_front_h` | Pad pivot (if used)                     | optional                    |
-| joint        | `foot_rear_h`  | Pad pivot (if used)                     | optional                    |
-| site         | `ee_site`      | “End-effector” / COM tracking site      | used for sensors            |
-| geom         | `ground`       | Ground plane                            | base friction               |
-
-**TODO:** Fill in the geometric and inertial parameters once CAD and mass measurements are finalized.
+| Element type | Name  | Description                             |
+| ------------ | -------------- | --------------------------------------- | 
+| body         | `first_left`, `first_right`, `second_left`, `second_right`     | Central body segments      | 
+| body         | `foot1`   | Front foot with low friction states | 
+| body         | `foot2`    | Rear pad with low friction states  | 
+| joint        | `mid_left`, `mid_right`    | Main arching hinge (compliant)          | 
+| joint        | `foot1` | Pad pivot                    | 
+| joint        | `foot2`  | Pad pivot (if used)                     | 
+| body         | `end_effector`      |  COM tracking site      | 
+| geom         | `ground`       | Ground plane                            |
 
 ---
 
@@ -81,7 +79,7 @@ The dynamic model includes both structural compliance and actuator dynamics.
 
     * Stiffness $$k_\theta$$ from Assignment 5 parameter identification. 
     * Damping $$b_\theta$$ tuned to match experimental decay.
-  * Represented in MuJoCo via `joint` attributes (`springref`, `stiffness`, `damping`) or via `tendon` springs.
+
 
 * **Actuator model:**
 
@@ -89,20 +87,16 @@ The dynamic model includes both structural compliance and actuator dynamics.
 
     * Proportional gain $$k_p$$ (position stiffness).
     * Derivative gain $$k_v$$ (effective actuator damping).
-  * Command input is joint target angle following a periodic gait pattern (e.g., square/triangular wave).
+  * Command input is joint target angle following a periodic square wave gait pattern
 
 * **Friction model:**
 
   * Different `friction` parameters for:
 
-    * Pad geoms $$high (\mu_\text{anchor})$$.
-    * Base/body geoms $$low (\mu_\text{slide})$$.
-  * Values based on friction experiment (Assignment 5) and/or tracker-based tests. 
+    * Foot geoms $$high (\mu_\text{anchor})$$.
+    * Base geoms $$low (\mu_\text{slide})$$.
+  * Values based on friction experiment (Assignment 5). 
 
-**TODO:**
-
-* Insert the final values of $$ (k_\theta), (b_\theta), (k_p), (k_v) $$, and friction coefficients once parameter identification is complete.
-* Note which joint(s) use compliant vs rigid modeling.
 
 ---
 
