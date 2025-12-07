@@ -9,7 +9,11 @@ redirect_from:
 
 ## Team and Project Overview
 
-This site documents the semester project for RAS 557: Foldable Robotics (Fall 2025, instructor: Daniel M. Aukes). The course focuses on bio‑inspired terrestrial locomotion, foldable fabrication methods, and simulation‑driven design.
+This site documents the semester project for [RAS 557: Foldable Robotics](https://foldable-robotics.github.io/)  
+Fall 2025,  
+Instructor: Daniel M. Aukes
+
+The course focuses on bio‑inspired terrestrial locomotion, foldable fabrication methods, and simulation‑driven design.
 
 The project investigates an inchworm‑inspired crawling robot based on the locomotion of [Manduca sexta larvae](https://en.wikipedia.org/wiki/Manduca_sexta). The robot uses rigid foldable linkages and friction‑modulated pads to reproduce the characteristic looped, two‑anchor gait of an inchworm in a planar setting. The long‑term objective is to develop a foldable, repeatable platform where geometry, actuation, and contact properties can be systematically varied and compared between simulation and experiment.
 
