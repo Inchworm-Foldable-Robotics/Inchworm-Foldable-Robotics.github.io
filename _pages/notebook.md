@@ -3,8 +3,8 @@ layout: archive
 title: "Jupyter Notebook"
 permalink: /notebook/
 author_profile: true
-redirect_from:
-  - /resume
+# redirect_from:
+#   - /resume
 ---
 
 ---

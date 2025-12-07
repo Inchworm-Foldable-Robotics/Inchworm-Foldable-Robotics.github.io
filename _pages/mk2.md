@@ -3,8 +3,8 @@ layout: archive
 title: "MK 2"
 permalink: /mk2/
 author_profile: true
-redirect_from:
-  - /resume
+# redirect_from:
+#   - /resume
 ---
 
 {% include base_path %}
