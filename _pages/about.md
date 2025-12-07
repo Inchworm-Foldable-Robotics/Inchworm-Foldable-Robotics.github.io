@@ -16,7 +16,9 @@ Instructor: Daniel M. Aukes
 
 The course focuses on bio‑inspired terrestrial locomotion, foldable fabrication methods, and simulation‑driven design.
 
-The project investigates an inchworm‑inspired crawling robot based on the locomotion of [Manduca sexta larvae](https://en.wikipedia.org/wiki/Manduca_sexta). The robot uses rigid foldable linkages and friction‑modulated pads to reproduce the characteristic looped, two‑anchor gait of an inchworm in a planar setting. The long‑term objective is to develop a foldable, repeatable platform where geometry, actuation, and contact properties can be systematically varied and compared between simulation and experiment.
+The project investigates an inchworm‑inspired crawling robot based on the locomotion of [Manduca sexta larvae](https://en.wikipedia.org/wiki/Manduca_sexta).  
+
+The robot uses rigid foldable linkages and friction-modulated pads to realize a planar, two-anchor lift-and-drag gait whose parameters can be measured, simulated, and systematically varied.
 
 The project team consists of:
 
@@ -24,152 +26,179 @@ The project team consists of:
 - [Colin Fricke](https://www.linkedin.com/in/colin-fricke)
 - Nathan Vairora  
 
-Together, the team is responsible for mechanism design, dynamic modeling in MuJoCo, parameter studies, and experimental validation.
+The current work is organized around the following research question:
 
+> **How does gait timing (period) influence the achievable speed and robustness of an inchworm-inspired foldable crawler, in both simulation and experiment?**
+
+This home page summarizes how that question connects to the team’s goals, the biological and robotic background, and the design–build–simulate–compare workflow of Project Assignment 2.
 
 ## Team Goals
 
-The technical goals of the project are to:
+### Candidate Identification
 
-- Design a foldable, inchworm‑inspired crawler that uses rigid linkages and friction‑modulated pads to achieve reliable forward locomotion on a flat surface.
-- Develop kinematic and dynamic models (MuJoCo + Python) that capture the main features of the biological gait, including alternating anchoring, lift‑and‑drag motion, and body contraction/extension.
-- Define and measure performance metrics such as stride length, gait period, average speed, and basic energetic cost, in both simulation and hardware.
-- Perform parameter studies on key design variables (e.g., linkage geometry, stroke amplitude, joint stiffness/damping, pad friction) and interpret their effect on locomotion performance.
-- Compare simulated and experimental behavior, and use discrepancies to refine the model and hardware design.
+The project takes the Manduca sexta larva (geometrid inchworm‑type crawler) as the primary biological inspiration. Manduca uses a characteristic two‑anchor looping gait: posterior prolegs anchor while the anterior body lifts and extends; then the anterior prolegs anchor while the posterior body is pulled forward, producing large body‑length‑scaled strides with relatively simple control. 
 
-The learning goals of the team within the context of RAS 557 are to:
+The robotic analog is a planar, inchworm‑inspired crawler with:
 
-- Gain practical experience with foldable robotics workflows from concept to prototype (cut, fold, assemble, actuate).
-- Apply vector‑based kinematics, Jacobians, and constraint equations to a real mechanism, using the course textbook and assignments as a reference. 
-- Build and tune dynamic simulations in MuJoCo, including compliance, realistic actuators, and contact/friction modeling.
-- Design and execute small‑scale experiments (video tracking, timing, basic force/torque estimation) and integrate the resulting data into a modeling and optimization workflow.
+* Two friction‑modulated pads (front and rear) acting as anchors.
+* A rigid, foldable linkage chain connecting the pads.
+* A single effective actuator that shortens and lengthens the body, analogous to the biological contraction–extension cycle.
+* Passive or lightly compliant joints that permit lift‑and‑drag motion without large out‑of‑plane deformation. 
 
-**[TODO: Add final list of team goals after design review]**
+This mechanism is designed so that key geometric and contact parameters (link lengths, pad spacing, friction coefficients) are explicitly modeled and can be matched between simulation and hardware.
 
+### Intent of Choice
 
-## Candidate Identification and Intent of Choice
+Inchworm‑like crawlers were chosen because they realize terrestrial locomotion through **friction modulation** and **body shape change**, rather than wheels or multi‑leg coordination. Prior work on Manduca sexta biomechanics and inchworm‑style robots demonstrates: stride lengths on the order of 0.3–0.5 body lengths, orientation‑robust gaits, and useful ground‑reaction force distributions for climbing and horizontal motion [1]–[4].
 
-Within this project, “candidate” refers to the specific combination of:
+Most existing inchworm robots, however, rely on smart materials (e.g., SMA wires) or soft bodies whose internal mechanics are difficult to parameterize [4]–[6]. In contrast, this project explicitly targets:
 
-- Biological inspiration: Manduca sexta inchworm gait (two anchors, looping contraction and extension).
-- Mechanical mechanism: a planar rigid‑link crawler with two gripping pads and an internal linkage network that converts actuator stroke into coordinated lift and translation.
-- Fabrication approach: laser‑cut or otherwise patterned laminate structure compatible with the foldable robotics workflow used in the course. 
+* A **rigid‑link, foldable prototype** compatible with laser‑cut laminates and the foldable fabrication workflow taught in RAS 557.
+* A geometry and actuation layout that are **easy to encode in MuJoCo**, including link inertias, joint compliance, and friction parameters.
 
-For Project Assignment 1, the team selected a candidate mechanism that approximates the inchworm’s deformable body using a small number of rigid links and hinges. The current concept uses:
+This choice supports systematic design variations and sim‑to‑real comparisons instead of one‑off demonstrations.
 
-- Two rigid “body” sections, each terminating in a friction pad that can act as an anchor.
-- An internal linkage (inspired by Sarrus and slider–crank topologies) that provides coupled vertical lift and horizontal motion between the two pads when driven by a single linear actuator.
-- Joints whose stiffness and damping can later be tuned in MuJoCo to approximate bending and compliance.
+### Research Question Rationale
 
-This candidate was chosen because it:
+The updated research question places **gait timing (period)**—rather than geometry or material choice—as the primary design variable:
 
-- Captures the essential two‑anchor, lift‑and‑drag pattern of inchworm locomotion in a planar, rigid‑link form.
-- Is amenable to vector‑based kinematic analysis (as completed in Project Assignment 1) and to extension into a dynamic MuJoCo model.
-- Fits well within the foldable fabrication constraints (laminate layers, simple hinge patterns, low part count).
-- Provides clear design parameters (link lengths, stroke, joint stiffness, pad friction) for systematic study.
+> **How does gait timing (period) influence the achievable speed and robustness of an inchworm-inspired foldable crawler, in both simulation and experiment?**
 
-**[TODO: Update candidate selection rationale after next iteration]**
+#### Scope
 
+The study focuses on a tightly defined problem:
 
-## Research Question and Rationale
+* **Locomotion mode:** quasi‑1D, planar crawling along a straight line (no turning or climbing) on a flat substrate.
+* **Scale:** nominal body length $$L \approx 100\ \text{mm}$$, consistent with the Assignment 1 design and performance metrics. 
+* **Mechanism:** a single inchworm‑type gait family with two pads and a rigid linkage chain; link geometry, mass properties, and hinge layout are held fixed during parameter sweeps. 
+* **Design variable:** gait timing (period and related timing parameters such as stance/swing partition and pad‑anchor duty cycle) is varied while actuator stroke, friction coefficients, and robot mass remain constant.
+* **Environment:** flat surfaces with controlled friction ratio between “anchor” and “slide” states (target friction ratio $$\mu_{\text{anchor}} / \mu_{\text{slide}} \geq 3$$), using the same pad materials and substrates in both simulation and experiments. 
+* **Sim–real alignment:** the same physical robot is modeled in MuJoCo as a dynamic system with joint stiffness/damping and a realistic actuator model, following the Project Assignment 2 specification.
 
-At a high level, the project asks:
+#### Impact
 
-How do gait timing and geometry (period, stroke/stride length, and body configuration) influence the achievable speed and robustness of an inchworm‑inspired foldable crawler, in both simulation and experiment?
+Understanding how gait period affects **speed** and **robustness** is relevant to applications where inchworm‑inspired modules may traverse confined or cluttered spaces: cable and pipe inspection, structural health monitoring, and deployable sensor networks [4]–[6].  
 
-The emerging research question focuses specifically on the relationship between:
+For a fixed stroke and friction ratio, average forward speed can be expressed as:
 
-- Gait period and duty cycle (how long each pad is anchored vs sliding),
-- Effective stride length per cycle (net translation per actuation stroke),
-- Resulting average forward speed and basic energetic cost (work per unit distance and per unit weight),
+$$
+v = \frac{\Delta x_{\text{cycle}}}{T_{\text{gait}}}
+$$
 
-under variations in linkage geometry and contact properties.
+where $$\Delta x_{\text{cycle}}$$ is the net displacement per cycle and $$T_{\text{gait}}$$ is the gait period. Too fast a period may cause slip, loss of anchoring, or actuator saturation; too slow a period wastes available actuation bandwidth. Robustness—in this context—is defined in terms of:
 
-The rationale for emphasizing period/stride length and speed is:
+* Repeatable forward progress across cycles (low variance in $$\Delta x_{\text{cycle}}$$).
+* Tolerance to friction variation and minor geometry/fabrication errors.
+* Absence of failure modes such as double‑slip or incomplete anchoring.
 
-- Biomechanical studies of Manduca sexta show that larvae achieve a characteristic stride‑to‑body‑length ratio and operate in a relatively narrow range of gait frequencies. Matching or exploring deviations from these values provides a clear way to connect the mechanical design back to the biological reference.
-- In a foldable mechanism with limited actuator stroke, stride length is tightly constrained by geometry; understanding this mapping is critical for designing compact but effective crawlers.
-- For small robots with limited onboard energy and actuation authority, average speed and cost of transport are more informative performance metrics than peak velocity alone.
+By mapping performance vs. timing in both simulation and hardware, the project aims to produce simple **design rules** for friction‑modulated foldable crawlers (e.g., recommended period ranges for given stroke and friction).
 
-The final wording of the research question will be refined once the dynamic model and initial experimental results are available.
+#### Team Fit
 
-**[TODO: Insert finalized wording of research question on period/stride length and speed]**
+The research question aligns with the team’s combined skills:
 
+* **Mechanism and CAD design:** translating Manduca‑like body kinematics into a foldable linkage with appropriate DOFs and range of motion. 
+* **MuJoCo and Python:** building a dynamic model with compliant joints, actuator dynamics, and contact, then scripting parameter sweeps over gait period and logging sensor data.
+* **Experiment design and data analysis:** using phone‑based motion capture, friction tests, and timing control (e.g., microcontroller‑based gait timing) to measure speed and robustness across timing conditions. 
 
-## Background Research and Existing Work
+These capabilities support the full Assignment 2 workflow: **design, build, simulate, and validate** the robot under controlled gait timing variations.
 
-Existing work on inchworm and caterpillar locomotion provides the biological and mechanical context for this project. Biomechanics studies of Manduca sexta describe how segments anchor and release in sequence, how body curvature evolves during a stride, and how ground‑reaction forces and frictional asymmetry contribute to net propulsion. These results provide realistic ranges for body length, stride length, gait period, curvature, and friction ratios that guide the design and scaling of the robot.
+#### Topic Fit
 
-On the robotics side, several inchworm‑style mechanisms have been proposed, including modular rigid crawlers, cable‑driven climbers, and soft crawling robots. Many of these systems implement the same fundamental pattern: two or more anchors with alternating high/low friction states and a central actuation unit that drives contraction and extension. Analytical models of slider–crank‑based crawlers provide direct relationships between link geometry and stride distance, while more recent soft‑robotic designs emphasize friction modulation and energy efficiency.
+The topic sits at the intersection of key Foldable Robotics course themes: 
 
-Project Assignment 1 synthesized these sources into a set of target specifications and a kinematic mechanism concept for a foldable inchworm‑style crawler.
+* **Foldable mechanisms:** converting a continuum inchworm body into a compact linkage with laser‑cut links and laminated hinges.
+* **MuJoCo simulation:** using constraint‑based dynamics, contact modeling, and joint compliance to capture the interplay of timing, friction, and inertia.
+* **Biomechanics and locomotion:** grounding performance metrics (stride‑to‑body‑length ratio, friction ratio, curvature limits) in Manduca sexta data and inchworm‑robot literature [1]–[7]. 
+* **System identification and optimization:** measuring real actuator and friction behavior, fitting parameters, and comparing predicted vs. observed performance as gait timing is varied.
 
-### Collecting Design Criteria
+This framing ensures that the project remains both biologically inspired and technically aligned with the course’s modeling, fabrication, and analysis goals.
 
-From the literature and the course context, the team is collecting design criteria along several dimensions, including:
+## Background Research
 
-- Locomotion performance: stride length relative to body length, average speed, and repeatability over multiple cycles.
-- Stability and robustness: resistance to tipping, sensitivity to surface variations, and tolerance to small geometric or fabrication errors.
-- Contact and friction: required friction ratio between anchored and sliding states, pad size and pressure, and surface compatibility.
-- Manufacturability and integration: panel sizes, hinge patterns, assembly complexity, and compatibility with available actuation and control hardware.
-- Sim‑to‑real alignment: parameters that can be measured experimentally (mass, stiffness, damping, friction, actuator characteristics) and directly mapped into the MuJoCo model. 
+### Existing Papers
 
-These criteria will be consolidated into a structured set of requirements that drive both the simulation models and the physical prototypes.
+Assignment 1 reviewed biomechanics and robotics literature relevant to inchworm‑style locomotion and friction‑modulated crawlers.   Key contributions include:
 
-**[TODO: Insert detailed design criteria table/list here]**
+* **Manduca kinematics and orientation‑robust gait** – van Griethuijsen and Trimmer [1] measured full‑body 3D kinematics of Manduca sexta crawling horizontally and vertically, showing similar proleg timing across orientations. For this project, their reported stride period and stride‑to‑body‑length ratios provide realistic targets for gait period and net displacement per cycle.
+* **Ground reaction forces and friction roles** – Lin and Trimmer [2] used multi‑contact force plates to quantify ground‑reaction forces under each proleg, showing that anterior prolegs primarily generate forward thrust while posterior prolegs often act as drag anchors. The associated friction ratios motivate the target difference between “anchor” and “slide” pad behavior.
+* **Beam‑bending model of inchworm curvature** – Plaut [3] modeled the inchworm body as a flexible beam undergoing large deflection, deriving relationships between curvature, arc length, and forward displacement. These results motivate curvature and “lift height” limits for the linkage‑based robot.
+* **Inchworm‑like rigid crawlers and climbers** – Wang et al. [4] and Li et al. [5] present rigid or cable‑driven climbing robots that mimic inchworm gaits using alternating grippers and variable body length. Their actuator layouts and reported speeds demonstrate that discrete linkages can reproduce inchworm‑style locomotion at practical scales.
+* **Soft crawler review** – Pan et al. [6] survey soft robotic crawlers, identifying inchworm gaits as two‑anchor peristaltic mechanisms dependent on friction anisotropy and anchoring stability. Their summary of design parameters (friction ratio, stride fraction, gait frequency) guides selection of performance metrics.
+* **Slider–crank inchworm line robot** – Wu [7] derives a slider‑crank kinematic model for a line‑inspection robot that emulates inchworm motion. The closed‑form relation between geometry, crank offset, and stride length informs the back‑solve of linkage parameters and actuator stroke in this project.
 
+Together, these works indicate that gait timing, friction ratio, and stroke amplitude jointly determine speed and stability in inchworm‑type locomotion, motivating a focused study of timing for a fixed geometry and friction configuration. 
 
-## Key Information and Figures
+### Key Information
 
-Several key conceptual and design figures will be introduced throughout the site to make the mechanism, gait, and performance measures clear.
+From Assignment 1, several quantitative and qualitative design choices directly inform the new timing‑focused study: 
 
-The first planned figure will be a schematic of the foldable inchworm robot showing the main components: front and rear rigid body sections, friction pads, internal linkage structure, and the primary actuator. This figure will help readers connect the abstract kinematic diagrams from Project Assignment 1 to the physical layout of the foldable mechanism.
+* **Scale and mass:** nominal body length $$L \approx 100\ \text{mm}$$, target mass $$m \approx 50\ \text{g}$$ including structure and actuator.
+* **Stride and speed targets:** stride length $$S \approx 0.25L \approx 25\ \text{mm}$$ and average speed on the order of $$v \approx 10\ \text{mm/s}$$, consistent with Manduca‑inspired scaling and practical actuation limits.
+* **Friction design:** two friction states with typical design values $$\mu_{\text{anchor}} \approx 0.8$$ and $$\mu_{\text{slide}} \approx 0.2$$, giving $$\mu_{\text{anchor}}/\mu_{\text{slide}} \geq 3$$–4. Pad materials and normal loads are chosen to realize this ratio on accessible lab surfaces.
+* **Mechanism concept:** two pads connected by a rigid, planar linkage driven by a single effective linear stroke, realizing a lift‑and‑drag gait with clear stance/swing phases at each pad.
+* **Performance metrics:** net forward displacement per cycle, average speed, thrust force, joint torques, and mechanical work were already estimated from force–friction and slider–crank analyses.
 
-<!-- TODO: Figure 1 – Schematic of the inchworm-foldable robot and its main components. :contentReference[oaicite:5]{index=5} -->
+In Assignment 2, the **primary new independent variable** becomes **gait period** and allied timing parameters, while these geometric and frictional quantities are held fixed to isolate temporal effects on speed and robustness.
 
-A second planned figure will illustrate the gait cycle as a sequence of configurations, including rear‑anchor/front‑slide, both‑anchored (looped posture), and front‑anchor/rear‑slide phases. The same figure can be used later to annotate sensor sites, pad states (anchored vs sliding), and key kinematic variables (e.g., body length, lift height).
+### Key Figures
 
-<!-- TODO: Figure 2 – Motion sequence showing key gait phases (anchor–release, lift–drag, and reset). -->
+The Assignment 1 report contains several figures that should be referenced on the website to connect biological motion, analytical models, and the proposed mechanism. 
 
-To support the focus on period, stride length, and speed, a third figure will show representative trajectories or time histories from the MuJoCo simulations: body or pad position vs time over several cycles, highlighting how stride length and period combine into an average forward speed.
+1. **Biological inchworm gait schematic / beam‑bending model**
 
-<!-- TODO: Figure 3 – Example trajectories illustrating period, stride length, and average speed from MuJoCo simulations. -->
+   ![Biological inchworm gait schematic](..\assets\01_Home\biological-gait.jpg)
+   *Figure 1: Schematic of Manduca‑style two‑anchor locomotion and its beam‑bending model, illustrating how body curvature and anchor sequencing generate net forward displacement per cycle [3]. This figure motivates the linkage’s target curvature and lift height, which in turn constrain feasible gait periods before slip and instability occur.*
 
-Finally, a comparison figure will later juxtapose simulation snapshots and experimental images or video frames for the same gait parameters, emphasizing sim‑to‑real agreement (and discrepancy) in stride, timing, and posture.
+2. **Manduca kinematics and gait phases**
 
-<!-- TODO: Figure 4 – Side-by-side comparison of simulated and experimental gait for a representative parameter set. -->
+   ![Manduca crawling kinematics](..\assets\01_Home\manduca-kinematics.jpg)
 
+   *Figure 2: Representative Manduca crawling kinematics showing stance and swing phases for each proleg pair [1]. The timing of these phases relative to the overall cycle informs the definition of gait period and anchor duty factors in the robot’s control parameterization.*
 
-## Goal Performance Metrics and Specifications
+3. **Slider–crank / inchworm line‑robot kinematic sketch**
 
-To evaluate the design and guide parameter studies, the project will use a small set of scalar performance metrics that can be computed in both simulation and experiment. These include, at minimum:
+   ![Slider–crank inchworm linkage](..\assets\01_Home\slider-crank.jpg)
 
-- Stride length per cycle and per body length.
-- Gait period and average forward speed.
-- Basic energetic measures such as work per cycle and cost of transport (where data permit).
-- Robustness indicators such as variance in stride length over multiple cycles.
-- Payload capability relative to robot weight, within the limits of the foldable structure and actuators.
+   *Figure 3: Kinematic sketch of a slider–crank‑based inchworm line robot [7]. The relation between geometric parameters and stride length, combined with fixed actuator stroke, constrains the range of gait periods that can be tested without exceeding actuator force or joint torque limits.*
 
-These metrics will be linked to a specification table that records design‑scale parameters (body length, mass, target friction ratios), actuation constraints (stroke, force/torque), and allowable ranges for joint stiffness and damping in the MuJoCo model. The specification table will be updated as the design is refined and as additional measurements are collected.
+4. **Foldable linkage concept for the inchworm crawler**
 
-**[TODO: Add finalized performance metrics and specifications table]**
+   ![Foldable inchworm linkage concept](..\assets\01_Home\linkage-concept.jpg)
 
+   *Figure 4: Simplified kinematic diagram of the foldable rigid‑link crawler, including front and rear pads, linkage chain, and actuation stroke. This figure is central for explaining how gait timing (period) is implemented in both simulation and hardware, and how anchor timing is mapped to pad friction states.*
 
-## Project Status and Next Steps
+These figures collectively provide the conceptual bridge from biological gait to rigid‑link mechanism and clarify why gait timing is a meaningful, controllable parameter in both simulation and experiment.
 
-At the current stage:
+### Project Novelty
 
-- Project Assignment 1 is complete. The team has selected the inchworm‑inspired candidate, performed a focused literature review, defined preliminary performance targets, developed a kinematic model and Jacobian for the proposed mechanism, and drafted an initial specifications table.
-- A paper prototype and mechanism sketches have been created to validate the basic lift‑and‑drag motion and to check qualitative feasibility of the linkage topology within foldable fabrication constraints.
-- The public website structure is in place using the AcademicPages Jekyll template, and this “About” page serves as the top‑level entry point for the project. 
+Relative to prior literature and Assignment 1, this project is novel in three main ways: 
 
-Over the remainder of the semester, the planned next steps are:
+1. **Focusing on gait timing (period) as the primary design variable**
+   While many inchworm‑style robots emphasize geometry, friction modulation hardware, or actuation technology [4]–[7], this project fixes those aspects and systematically varies gait period and phase relationships. This isolates how timing alone trades off average speed vs. robustness (slip, failed steps, and sensitivity to friction changes).
 
-- Dynamic modeling: upgrade the kinematic mechanism into a full dynamic MuJoCo model with realistic masses, joint compliance, damping, actuators, and contact/friction parameters.
-- Parameter studies: use Python scripts to perform parameter sweeps (e.g., varying stroke, stiffness, friction coefficients) and compute performance metrics via MuJoCo sensors and state data.
-- Hardware build: fabricate and assemble a foldable prototype using the course’s laminate workflow, integrate actuators and simple control, and refine the design based on observed behavior.
-- Experimental campaign: collect motion and timing data (e.g., via phone video and tracking tools) across a range of gait and design parameters that match the simulation cases.
-- Sim‑to‑real comparison: analyze how well the dynamic model predicts stride length, period, speed, and qualitative posture, and document sources of mismatch (e.g., friction, compliance, backlash).
-- Documentation: update this website with figures, tables, and short video clips summarizing the modeling, parameter study, and experimental results, and link clearly to the MuJoCo model and analysis repository.
+2. **Direct sim–to–real comparison with a shared, foldable rigid‑link platform**
+   A single foldable crawler design is implemented both as a detailed MuJoCo model and as a physical laminate prototype. Joint stiffness/damping, actuator dynamics, and pad friction are measured or estimated and then encoded in the simulation. The same gait timing parameterization (period, pad duty factors) is applied in both domains to enable quantitative comparisons of speed, stride length, and failure rates as timing is varied.
 
-**[TODO: Cross-check and align this overview with final Assignment 2 report structure and grading rubric.  ]**
+3. **Mechanism transparency and parameter identifiability**
+   Unlike soft or SMA‑driven inchworm robots, the foldable rigid‑link design offers well‑defined link inertias, joint axes, and contact geometries, making model parameters identifiable from straightforward experiments (mass measurement, friction tests, hinge characterization). This transparency supports a **closed loop** of: literature‑informed specification → Assignment 1 kinematics and performance estimates → dynamic modeling and timing sweeps (Assignment 2) → physical experiments and sim–real comparison.
+
+By centering the question of **“What gait periods actually work best for a given foldable crawler?”**, the project contributes timing‑oriented design guidance for friction‑modulated, inchworm‑inspired robots that extends beyond a single mechanism instance.
+
+## References
+
+Numbers correspond to the references used in the Assignment 1 report; full bibliographic details are provided there. 
+
+[1] N. P. L. Griethuijsen and B. A. Trimmer, “Crawling kinematics of Manduca sexta larvae on horizontal and vertical substrates,” *J. Exp. Biol.*, 2009.
+
+[2] H. T. Lin and B. A. Trimmer, “Multi‑contact ground reaction forces of crawling Manduca sexta,” *J. Exp. Biol.*, 2010 (with 2011 corrigendum).
+
+[3] R. H. Plaut, “Large deflection model of inchworm locomotion using a flexible beam,” *Int. J. Non‑Linear Mech.*, 2015.
+
+[4] X. Wang *et al.*, “A mini‑modular climbing caterpillar robot with inchworm‑like gait,” *Prog. Nat. Sci.*, 2009.
+
+[5] Y. Li *et al.*, “An inchworm‑like climbing robot based on cable‑driven grippers,” 2024.
+
+[6] M. Pan *et al.*, “Bio‑inspired soft crawling robots: mechanisms, actuation, and control,” *Adv. Sci.*, 2025.
+
+[7] F. Wu, “Kinematic analysis of a line robot based on inchworm biomimicry,” 2024.
