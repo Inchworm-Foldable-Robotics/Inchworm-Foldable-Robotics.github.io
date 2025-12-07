@@ -83,6 +83,34 @@ Within SolidWorks, V2 was used to verify that the fold unfold motion remained si
 
 No major issues were identified during the development of V2. Instead, this version served as an effective stepping stone, confirming that the triangular layout was compatible with the desired motion and would be suitable for more advanced modeling. With these results, the team was able to proceed confidently toward V3, where more detailed hinge mechanics, structural considerations, and actuation strategies would be incorporated.
 
+# V3
+
+Version 3 represented the team’s first attempt to transition from conceptual geometry into a fully manufacturable mechanism. Whereas Versions 1 and 2 focused on defining overall form and simplifying kinematic behavior, V3 aimed to introduce realistic hardware, establish structural frameworks suitable for fabrication, and explore mounting strategies for future actuation. This iteration served as the bridge between digital sketching and practical engineering considerations.
+
+The most significant change in V3 was the introduction of real hinge hardware in place of the virtual mates used in earlier versions. The mechanism adopted a tab and slot panel design, reinforced with perimeter ribs to improve stiffness and better approximate the behavior of the final folded structure. The team also incorporated early motor mount geometries and began evaluating how solenoid actuators might integrate into the overall architecture. These additions required a more detailed internal framework and clearer definition of panel connections.
+
+V3 was designed around fabrication methods that had not been considered in previous versions. The team explored laser cut wooden panels, combined with 3D printed hinge components secured by bolts and nuts. Although this version remained digital, it was modeled as if it were to be physically assembled, ensuring that real tolerances, material thicknesses, and hardware constraints were incorporated into the geometry.
+
+Functionally, V3 attempted to improve several mechanical characteristics:
+
+* More controlled and predictable hinge rotation,
+
+* Increased structural rigidity under load,
+
+* Dedicated interior volume for electronics,
+
+* Refined anchor foot integration, and
+
+* Improved symmetry during the fold unfold motion.
+
+These goals required significantly more detail than in prior versions, and the resulting model exposed several important limitations. The added hardware substantially increased the estimated system weight, contradicting the simplicity desired for a foldable, lightweight prototype. The number of hinge components led to unexpected assembly complexity, and several clearance and interference issues emerged once real geometry was introduced. These observations prompted the team to reconsider the direction of the design.
+
+The key lesson from V3 was the importance of maintaining scope. The team recognized that the design had drifted toward unnecessary complexity introducing heavy materials, multiple hinges, and solenoid actuators before they were truly needed. This led to the decision to return to the five layer foldable material system used in class and to refocus on simplicity, weight reduction, and manufacturability. The insights gained in V3 directly shaped the more streamlined approach taken in subsequent iterations.
+
+# V4/Final
+
+
+
 # Insparation 
 
 ![Mechanism Geometry](../assets/03_Design/Inchworm1.png)
