@@ -16,16 +16,16 @@ Before beginning any mechanical design work, we studied how inchworms generate m
 The first image (Inchworm1) shows the natural inchworm motion cycle:
 
 
-* The rear end anchors,
+* The rear end anchors
 
 
-* The body arches upward,
+* The body arches upward
 
 
-* The front end extends forward and anchors,
+* The front end extends forward and anchors
 
 
-* The rear releases and follows.
+* The rear releases and follows
 
 
 This sequence highlighted two key principles we needed to replicate mechanically: alternating anchoring and body arching that converts vertical motion into forward displacement.
@@ -35,13 +35,13 @@ This sequence highlighted two key principles we needed to replicate mechanically
 The second image (Inchworm2) presents a simplified kinematic interpretation of this gait. It shows how a small number of joints can recreate the arch extend reset pattern through controlled rotation. The diagram specifically illustrates:
 
 
-* How angles between segments open and close during the stride,
+* How angles between segments open and close during the stride
 
 
-* How one end remains fixed while the other swings forward,
+* How one end remains fixed while the other swings forward
 
 
-* How joint states (free vs. locked) determine which segment acts as the anchor.
+* How joint states (free vs. locked) determine which segment acts as the anchor
 
 
 From this, we concluded that the mechanism could be reduced to a central folding joint and two end segments serving as controllable anchors.
@@ -51,13 +51,13 @@ From this, we concluded that the mechanism could be reduced to a central folding
 The third image (Inchworm3) shows a parametric sketch of a linkage based inchworm mechanism, introducing variables such as link lengths, hinge angles, and stride geometry. This diagram made clear that:
 
 
-* Stride length is directly determined by linkage geometry,
+* Stride length is directly determined by linkage geometry
 
 
-* the maximum and minimum hinge angles define lift height and extension,
+* the maximum and minimum hinge angles define lift height and extension
 
 
-* a triangular or folded shape naturally produces the required arching motion.
+* a triangular or folded shape naturally produces the required arching motion
 
 
 This confirmed that a triangular foldable structure with one actuated hinge could reproduce the biological gait while remaining easy to fabricate from sheet materials.
@@ -93,15 +93,15 @@ V3 was designed around fabrication methods that had not been considered in previ
 
 Functionally, V3 attempted to improve several mechanical characteristics:
 
-* More controlled and predictable hinge rotation,
+* More controlled and predictable hinge rotation
 
-* Increased structural rigidity under load,
+* Increased structural rigidity under load
 
-* Dedicated interior volume for electronics,
+* Dedicated interior volume for electronics
 
-* Refined anchor foot integration, and
+* Refined anchor foot integration
 
-* Improved symmetry during the fold unfold motion.
+* Improved symmetry during the fold unfold motion
 
 These goals required significantly more detail than in prior versions, and the resulting model exposed several important limitations. The added hardware substantially increased the estimated system weight, contradicting the simplicity desired for a foldable, lightweight prototype. The number of hinge components led to unexpected assembly complexity, and several clearance and interference issues emerged once real geometry was introduced. These observations prompted the team to reconsider the direction of the design.
 
@@ -109,7 +109,25 @@ The key lesson from V3 was the importance of maintaining scope. The team recogni
 
 # V4/Final
 
+Version 4 represented the team’s first fully functional physical prototype and served as the culmination of all prior design iterations. The primary objectives of this version were to validate the finalized hinge pattern, integrate real actuation hardware, and demonstrate a complete servo driven inchworm gait using a foldable structure. Unlike previous digital only models, V4 embodied the final architectural choices and provided the first opportunity to evaluate the mechanism under realistic operating conditions.
 
+A major improvement in V4 was the return to the five layer laminated foldable material, which had proven reliable during classroom exercises and offered the appropriate combination of stiffness, durability, and hinge compliance. The design was manufactured using laser cut panels with pre defined hinge slots, resulting in a clean, lightweight structure that folded into the intended triangular mechanism. This approach also removed the excessive hardware weight seen in V3, yielding a more biomechanically plausible configuration.
+
+V4 introduced full servo integration, replacing the heavier and more complex solenoid based concept previously explored. Three SG92R micro servos were embedded directly into the folding geometry: one for the central compression/retraction joint and two for front and rear anchoring actions. These were wired to an ESP32 microcontroller, allowing the team to implement and refine a synchronized control sequence for the gait cycle. The hinge layout and cut pattern translated effectively into real folding joints, forming the first version of the system with true mechanical compliance rather than simulated connections.
+
+During testing, V4 successfully demonstrated several key behaviors:
+
+* Reliable compression and extension of the body
+
+* Functional actuation of the front and rear anchoring servos
+
+* Coordinated electronic timing of the gait via ESP32 control
+
+* Proof that the folded hinge pattern could carry load without collapsing
+
+Although the prototype performed the expected motion, several limitations emerged. The lightweight servos struggled with torque demands and were not fully tuned, leading to inconsistent foot actuation and occasional alignment issues. The mechanism also experienced slipping on smooth surfaces, and the hinge folds occasionally collapsed inward if actuated too aggressively. Timing synchronization between servos required refinement, and the arcing motion inherent to servo rotation introduced inefficiencies during the lift phase.
+
+The central takeaway from V4 was that, while the servo driven system achieved the correct overall motion direction and demonstrated a viable control architecture, rotary servos were not an ideal choice for producing vertical lifting forces at the hinges. A linear or non arcing actuator would likely improve lift efficiency and reduce mechanical interference. Nonetheless, V4 provided strong validation of the fold geometry, the five layer material approach, and the overall feasibility of achieving inchworm locomotion using a digitally fabricated hinge based body
 
 # Insparation 
 
