@@ -101,19 +101,15 @@ The dynamic model includes both structural compliance and actuator dynamics.
   * The site on this model is the `end_effector`body in the middle of the "head" of the inchworm. This position allows us to track the position of this geom over time and plot it to see how it moves during the simulation.
 * **Performance metric:**
 
-  * Average forward speed:
-    $$
-    v_x = \frac{x_\text{final} - x_\text{initial}}{T_\text{sim}}
-    $$
-  * This variable makes sense as a metric of performance for the inchworm, as it demonstrates how effective it is at moving forward.
+  * Position in the x direction:
+
+    * This variable makes sense as a metric of performance for the inchworm, as it demonstrates how effective it is at moving forward.
 
 ---
 
 ## 1.5 MuJoCo XML Template 
 
 ```python
-# This block defines a parameterized MuJoCo XML template as a Python string.
-# It will be formatted later with specific parameter values (stiffness, damping, friction, etc.).
 
 import os
 import mujoco
@@ -358,7 +354,7 @@ plt.grid(True)
 
 ---
 
-## 3.4 Sources of Error and Model Limitations
+## 1.8 Sources of Error and Model Limitations
 
 Summarizing the likely reasons for discrepancies between simulation and experiment, tying back to modeling choices:
 
