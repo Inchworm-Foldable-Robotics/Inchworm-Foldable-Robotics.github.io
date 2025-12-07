@@ -286,28 +286,28 @@ media.show_video(frames, fps = framerate)
 ![]()
 <img src='..\assets\04_Results\inchworm_crawlP4.gif' width="600" height="400">  
 
-*Figure 1. MuJoCo model schematic showing the inchworm crawling at a period of 4 seconds
+*Figure 1. MuJoCo model schematic showing the inchworm crawling at a period of 4 seconds*
 
 ### Repeated code for a period of 2 seconds
 
 ![]()
 <img src='..\assets\04_Results\inchworm_crawlP2.gif' width="600" height="400">  
 
-*Figure 2. MuJoCo model schematic showing the inchworm crawling at a period of 2 seconds
+*Figure 2. MuJoCo model schematic showing the inchworm crawling at a period of 2 seconds*
 
 ### Period of 1 second
 
 ![]()
 <img src='..\assets\04_Results\inchworm_crawlP1.gif' width="600" height="400">  
 
-*Figure 3. MuJoCo model schematic showing the inchworm crawling at a period of 1 second
+*Figure 3. MuJoCo model schematic showing the inchworm crawling at a period of 1 second*
 
 ### Period of .5 seconds
 
 ![]()
 <img src='..\assets\04_Results\inchworm_crawlP_5.gif' width="600" height="400">  
 
-*Figure 4. MuJoCo model schematic showing the inchworm crawling at a period of .5 seconds
+*Figure 4. MuJoCo model schematic showing the inchworm crawling at a period of .5 seconds*
 
 This sweep of the independent parameter highlights the optimized gait period in the simulation
 
@@ -328,33 +328,33 @@ plt.grid(True)
 ---
 ### Period of 4 seconds
 
-![](..\assets\04_Results\SimP4.png)
+![](..\assets\04_Results\SimP4.png)  
 
-*Figure 5. Tracking data of the inchworm crawling at a period of 4 seconds
+*Figure 5. Tracking data of the inchworm crawling at a period of 4 seconds*
 
 ### Period of 2 seconds
 
-![](..\assets\04_Results\SimP2.png)
+![](..\assets\04_Results\SimP2.png)  
 
-*Figure 6. Tracking data of the inchworm crawling at a period of 2 seconds
+*Figure 6. Tracking data of the inchworm crawling at a period of 2 seconds*
 
 ### Period of 1 second
 
-![](..\assets\04_Results\SimP1.png)
+![](..\assets\04_Results\SimP1.png)  
 
-*Figure 7. Tracking data of the inchworm crawling at a period of 1 second
+*Figure 7. Tracking data of the inchworm crawling at a period of 1 second*
 
 ### Period of .5 seconds
 
-![](..\assets\04_Results\SimP_5.png)
+![](..\assets\04_Results\SimP_5.png)  
 
-*Figure 8. Tracking data of the inchworm crawling at a period of .5 seconds
+*Figure 8. Tracking data of the inchworm crawling at a period of .5 seconds*
 
 ### Combination plot of all periods
 
-![](..\assets\04_Results\SimPAll.png)
+![](..\assets\04_Results\SimPAll.png)  
 
-*Figure 9. Tracking data of the inchworm crawling at all periods for comparison
+*Figure 9. Tracking data of the inchworm crawling at all periods for comparison*
 
 
 ---
@@ -389,7 +389,7 @@ Summarize the key trends from the parameter sweep:
 
 ---
 
-![Simulation snapshots of the inchworm model at different phases of the gait](path/to/sim_snapshots.png)
+![Simulation snapshots of the inchworm model at different phases of the gait](path/to/sim_snapshots.png)  
 *Figure 3. Simulation snapshots over one gait cycle, showing lift–drag locomotion for a representative parameter setting. TODO: render and capture images from MuJoCo.*
 
 ---
