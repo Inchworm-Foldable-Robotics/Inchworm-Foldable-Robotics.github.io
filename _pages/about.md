@@ -152,19 +152,19 @@ The Assignment 1 report contains several figures that should be referenced on th
 
 2. **Manduca kinematics and gait phases**
 
-   ![Manduca crawling kinematics](..\assets\01_Home\manduca-kinematics.jpg)
+   ![Manduca crawling kinematics](..\assets\01_Home\manducakinematics.jpg)
 
    *Figure 2: Representative Manduca crawling kinematics showing stance and swing phases for each proleg pair [1]. The timing of these phases relative to the overall cycle informs the definition of gait period and anchor duty factors in the robot’s control parameterization.*
 
 3. **Slider–crank / inchworm line‑robot kinematic sketch**
 
-   ![Slider–crank inchworm linkage](..\assets\01_Home\slider-crank.jpg)
+   ![Slider–crank inchworm linkage](..\assets\01_Home\slidercrank.jpg)
 
    *Figure 3: Kinematic sketch of a slider–crank‑based inchworm line robot [7]. The relation between geometric parameters and stride length, combined with fixed actuator stroke, constrains the range of gait periods that can be tested without exceeding actuator force or joint torque limits.*
 
 4. **Foldable linkage concept for the inchworm crawler**
 
-   ![Foldable inchworm linkage concept](..\assets\01_Home\linkage-concept.jpg)
+   ![Foldable inchworm linkage concept](..\assets\01_Home\linkageconcept.jpg)
 
    *Figure 4: Simplified kinematic diagram of the foldable rigid‑link crawler, including front and rear pads, linkage chain, and actuation stroke. This figure is central for explaining how gait timing (period) is implemented in both simulation and hardware, and how anchor timing is mapped to pad friction states.*
 
