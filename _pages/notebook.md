@@ -283,33 +283,37 @@ media.show_video(frames, fps = framerate)
 
 ---
 
-![Gif of crawl at P4]()
+![]()
 <img src='..\assets\04_Results\inchworm_crawlP4.gif' width="600" height="400">  
+
 *Figure 1. MuJoCo model schematic showing the inchworm crawling at a period of 4 seconds
 
 ### Repeated code for a period of 2 seconds
 
-![Gif of crawl at P2]()
+![]()
 <img src='..\assets\04_Results\inchworm_crawlP2.gif' width="600" height="400">  
+
 *Figure 2. MuJoCo model schematic showing the inchworm crawling at a period of 2 seconds
 
 ### Period of 1 second
 
-![Gif of crawl at P1]()
+![]()
 <img src='..\assets\04_Results\inchworm_crawlP1.gif' width="600" height="400">  
+
 *Figure 3. MuJoCo model schematic showing the inchworm crawling at a period of 1 second
 
 ### Period of .5 seconds
 
-![Gif of crawl at P.5]()
+![]()
 <img src='..\assets\04_Results\inchworm_crawlP_5.gif' width="600" height="400">  
+
 *Figure 4. MuJoCo model schematic showing the inchworm crawling at a period of .5 seconds
 
 This sweep of the independent parameter highlights the optimized gait period in the simulation
 
 ---
 
-# Plotting Simulation Results
+## 1.7 Plotting Simulation Results
 
 Below is a simple plot of the x poisiton of the end effector on the inchworm over time, to see how it reacts for different gait periods
 
@@ -324,42 +328,44 @@ plt.grid(True)
 ---
 ### Period of 4 seconds
 
-![png of xpos at P4](..\assets\04_Results\SimP4.png)
+![](..\assets\04_Results\SimP4.png)
+
 *Figure 5. Tracking data of the inchworm crawling at a period of 4 seconds
 
 ### Period of 2 seconds
 
-![png of xpos at P4](..\assets\04_Results\SimP2.png)
+![](..\assets\04_Results\SimP2.png)
+
 *Figure 6. Tracking data of the inchworm crawling at a period of 2 seconds
 
 ### Period of 1 second
 
-![png of xpos at P4](..\assets\04_Results\SimP1.png)
+![](..\assets\04_Results\SimP1.png)
+
 *Figure 7. Tracking data of the inchworm crawling at a period of 1 second
 
 ### Period of .5 seconds
 
-![png of xpos at P4](..\assets\04_Results\SimP_5.png)
+![](..\assets\04_Results\SimP_5.png)
+
 *Figure 8. Tracking data of the inchworm crawling at a period of .5 seconds
 
 ### Combination plot of all periods
 
-![png of xpos at P4](..\assets\04_Results\SimPAll.png)
+![](..\assets\04_Results\SimPAll.png)
+
 *Figure 9. Tracking data of the inchworm crawling at all periods for comparison
-
-
----
 
 
 ---
 
 # Results, Summary, and Discussion
 
-This section is where you will present and interpret both simulation and experimental results, compare them, and discuss the sim-to-real gap. It mirrors the expectations of the Project Assignment 2 report and video. 
+This section is where you will present and interpret the simulation results.
 
 ---
 
-## 3.1 Simulation Results
+## 2.1 Simulation Results
 
 Summarize the key trends from the parameter sweep:
 
