@@ -11,7 +11,7 @@ author_profile: true
 
 ![](..\assets\04_Results\ActP2.png)  
 
-*Figure 2. Experimental data of the inchworm at a period of 2 seconds*
+*Figure 2. Experimental data of the inchworm at a period of 2 seconds. As can be seen, some of the data got distorted during tracking. This has been taken into account and will not affect analysis*
 
 ![](..\assets\04_Results\ActP1.png)  
 
@@ -20,6 +20,10 @@ author_profile: true
 ![](..\assets\04_Results\ActP_5.png)  
 
 *Figure 4. Experimental data of the inchworm at a period of .5 seconds*
+
+![](..\assets\04_Results\ActPAll.png)  
+
+*Figure 4. Experimental data of the inchworm at all periods overlayed*
 
 ---
 
