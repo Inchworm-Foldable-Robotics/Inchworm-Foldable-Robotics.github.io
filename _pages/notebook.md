@@ -312,16 +312,11 @@ plt.imshow(frames[0])
 plt.axis('off')
 ```
 
-**TODO:**
-
-* Check that the motion qualitatively matches your intended gait (lift–drag pattern).
-* Adjust the gait command (e.g., phase shifts, duty cycles, additional actuators) to match your experimental controller.
-* Once stable, freeze these as your “baseline” model parameters.
-
 ---
 
-![Screenshot of the MuJoCo inchworm model highlighting bodies, joints, and contact pads](path/to/model_schematic.png)
-*Figure 1. MuJoCo model schematic showing the inchworm-inspired crawler, body segments, and friction pads. TODO: capture an actual screenshot from the MuJoCo viewer.*
+![Screenshot of the MuJoCo inchworm model highlighting bodies, joints, and contact pads]()
+<img src = '..\assets\04_Results\inchwormcrawlP4.gif' width="600" height="400">
+*Figure 1. MuJoCo model schematic showing the inchworm-inspired crawler, body segments, and friction pads.
 
 ---
 
