@@ -7,50 +7,165 @@ redirect_from:
   - /about.html
 ---
 
-This is the front page of a website that is powered by the [Academic Pages template](https://github.com/academicpages/academicpages.github.io) and hosted on GitHub pages. [GitHub pages](https://pages.github.com) is a free service in which websites are built and hosted from code and data stored in a GitHub repository, automatically updating when a new commit is made to the repository. This template was forked from the [Minimal Mistakes Jekyll Theme](https://mmistakes.github.io/minimal-mistakes/) created by Michael Rose, and then extended to support the kinds of content that academics have: publications, talks, teaching, a portfolio, blog posts, and a dynamically-generated CV. Incidentally, these same features make it a great template for anyone that needs to show off a professional template!
+## Team and Project Overview
 
- You can fork [this template](https://github.com/academicpages/academicpages.github.io) right now, modify the configuration and Markdown files, add your own PDFs and other content, and have your own site for free, with no ads!
+This site documents the semester project for RAS 557: Foldable Robotics (Fall 2025, instructor: Daniel M. Aukes). The course focuses on bio‑inspired terrestrial locomotion, foldable fabrication methods, and simulation‑driven design.
 
-A data-driven personal website
-======
-Like many other Jekyll-based GitHub Pages templates, Academic Pages makes you separate the website's content from its form. The content & metadata of your website are in structured Markdown files, while various other files constitute the theme, specifying how to transform that content & metadata into HTML pages. You keep these various Markdown (.md), YAML (.yml), HTML, and CSS files in a public GitHub repository. Each time you commit and push an update to the repository, the [GitHub pages](https://pages.github.com/) service creates static HTML pages based on these files, which are hosted on GitHub's servers free of charge.
+The project investigates an inchworm‑inspired crawling robot based on the locomotion of Manduca sexta larvae. The robot uses rigid foldable linkages and friction‑modulated pads to reproduce the characteristic looped, two‑anchor gait of an inchworm in a planar setting. The long‑term objective is to develop a foldable, repeatable platform where geometry, actuation, and contact properties can be systematically varied and compared between simulation and experiment.
 
-Many of the features of dynamic content management systems (like Wordpress) can be achieved in this fashion, using a fraction of the computational resources and with far less vulnerability to hacking and DDoSing. You can also modify the theme to your heart's content without touching the content of your site. If you get to a point where you've broken something in Jekyll/HTML/CSS beyond repair, your Markdown files describing your talks, publications, etc. are safe. You can rollback the changes or even delete the repository and start over - just be sure to save the Markdown files! You can also write scripts that process the structured data on the site, such as [this one](https://github.com/academicpages/academicpages.github.io/blob/master/talkmap.ipynb) that analyzes metadata in pages about talks to display [a map of every location you've given a talk](https://academicpages.github.io/talkmap.html).
+The project team consists of:
 
-For those users that need more advanced functionality, the template also supports the following popular tools:
-- [MathJax](https://www.mathjax.org/) for mathematical equations
-- [Mermaid](https://mermaid.js.org/) for diagraming
-- [Plotly](https://plotly.com/javascript/) for plotting
+- Sai Srinivas Tatwik Meesala  
+- Colin Fricke  
+- Nathan Vairora  
 
-Getting started
-======
-1. Register a GitHub account if you don't have one and confirm your e-mail (required!)
-1. Fork [this template](https://github.com/academicpages/academicpages.github.io) by clicking the "Use this template" button in the top right. 
-1. Go to the repository's settings (rightmost item in the tabs that start with "Code", should be below "Unwatch"). Rename the repository "[your GitHub username].github.io", which will also be your website's URL.
-1. Set site-wide configuration and create content & metadata (see below -- also see [this set of diffs](https://archive.is/3TPas) showing what files were changed to set up [an example site](https://getorg-testacct.github.io) for a user with the username "getorg-testacct")
-1. Upload any files (like PDFs, .zip files, etc.) to the files/ directory. They will appear at https://[your GitHub username].github.io/files/example.pdf.  
-1. Check status by going to the repository settings, in the "GitHub pages" section
+Together, the team is responsible for mechanism design, dynamic modeling in MuJoCo, parameter studies, and experimental validation, with this website serving as the primary public report for both Project Assignment 1 and Project Assignment 2. :contentReference[oaicite:0]{index=0}
 
-Site-wide configuration
-------
-The main configuration file for the site is in the base directory in [_config.yml](https://github.com/academicpages/academicpages.github.io/blob/master/_config.yml), which defines the content in the sidebars and other site-wide features. You will need to replace the default variables with ones about yourself and your site's github repository. The configuration file for the top menu is in [_data/navigation.yml](https://github.com/academicpages/academicpages.github.io/blob/master/_data/navigation.yml). For example, if you don't have a portfolio or blog posts, you can remove those items from that navigation.yml file to remove them from the header. 
 
-Create content & metadata
-------
-For site content, there is one Markdown file for each type of content, which are stored in directories like _publications, _talks, _posts, _teaching, or _pages. For example, each talk is a Markdown file in the [_talks directory](https://github.com/academicpages/academicpages.github.io/tree/master/_talks). At the top of each Markdown file is structured data in YAML about the talk, which the theme will parse to do lots of cool stuff. The same structured data about a talk is used to generate the list of talks on the [Talks page](https://academicpages.github.io/talks), each [individual page](https://academicpages.github.io/talks/2012-03-01-talk-1) for specific talks, the talks section for the [CV page](https://academicpages.github.io/cv), and the [map of places you've given a talk](https://academicpages.github.io/talkmap.html) (if you run this [python file](https://github.com/academicpages/academicpages.github.io/blob/master/talkmap.py) or [Jupyter notebook](https://github.com/academicpages/academicpages.github.io/blob/master/talkmap.ipynb), which creates the HTML for the map based on the contents of the _talks directory).
+## Team Goals
 
-**Markdown generator**
+The technical goals of the project are to:
 
-The repository includes [a set of Jupyter notebooks](https://github.com/academicpages/academicpages.github.io/tree/master/markdown_generator
-) that converts a CSV containing structured data about talks or presentations into individual Markdown files that will be properly formatted for the Academic Pages template. The sample CSVs in that directory are the ones I used to create my own personal website at stuartgeiger.com. My usual workflow is that I keep a spreadsheet of my publications and talks, then run the code in these notebooks to generate the Markdown files, then commit and push them to the GitHub repository.
+- Design a foldable, inchworm‑inspired crawler that uses rigid linkages and friction‑modulated pads to achieve reliable forward locomotion on a flat surface.
+- Develop kinematic and dynamic models (MuJoCo + Python) that capture the main features of the biological gait, including alternating anchoring, lift‑and‑drag motion, and body contraction/extension.
+- Define and measure performance metrics such as stride length, gait period, average speed, and basic energetic cost, in both simulation and hardware.
+- Perform parameter studies on key design variables (e.g., linkage geometry, stroke amplitude, joint stiffness/damping, pad friction) and interpret their effect on locomotion performance.
+- Compare simulated and experimental behavior, and use discrepancies to refine the model and hardware design.
 
-How to edit your site's GitHub repository
-------
-Many people use a git client to create files on their local computer and then push them to GitHub's servers. If you are not familiar with git, you can directly edit these configuration and Markdown files directly in the github.com interface. Navigate to a file (like [this one](https://github.com/academicpages/academicpages.github.io/blob/master/_talks/2012-03-01-talk-1.md) and click the pencil icon in the top right of the content preview (to the right of the "Raw | Blame | History" buttons). You can delete a file by clicking the trashcan icon to the right of the pencil icon. You can also create new files or upload files by navigating to a directory and clicking the "Create new file" or "Upload files" buttons. 
+The learning goals of the team within the context of RAS 557 are to:
 
-Example: editing a Markdown file for a talk
-![Editing a Markdown file for a talk](/images/editing-talk.png)
+- Gain practical experience with foldable robotics workflows from concept to prototype (cut, fold, assemble, actuate).
+- Apply vector‑based kinematics, Jacobians, and constraint equations to a real mechanism, using the course textbook and assignments as a reference. 
+- Build and tune dynamic simulations in MuJoCo, including compliance, realistic actuators, and contact/friction modeling.
+- Design and execute small‑scale experiments (video tracking, timing, basic force/torque estimation) and integrate the resulting data into a modeling and optimization workflow.
 
-For more info
-------
-More info about configuring Academic Pages can be found in [the guide](https://academicpages.github.io/markdown/), the [growing wiki](https://github.com/academicpages/academicpages.github.io/wiki), and you can always [ask a question on GitHub](https://github.com/academicpages/academicpages.github.io/discussions). The [guides for the Minimal Mistakes theme](https://mmistakes.github.io/minimal-mistakes/docs/configuration/) (which this theme was forked from) might also be helpful.
+**[TODO: Add final list of team goals after design review]**
+
+
+## Candidate Identification and Intent of Choice
+
+Within this project, “candidate” refers to the specific combination of:
+
+- Biological inspiration: Manduca sexta inchworm gait (two anchors, looping contraction and extension).
+- Mechanical mechanism: a planar rigid‑link crawler with two gripping pads and an internal linkage network that converts actuator stroke into coordinated lift and translation.
+- Fabrication approach: laser‑cut or otherwise patterned laminate structure compatible with the foldable robotics workflow used in the course. :contentReference[oaicite:2]{index=2}
+
+For Project Assignment 1, the team selected a candidate mechanism that approximates the inchworm’s deformable body using a small number of rigid links and hinges. The current concept uses:
+
+- Two rigid “body” sections, each terminating in a friction pad that can act as an anchor.
+- An internal linkage (inspired by Sarrus and slider–crank topologies) that provides coupled vertical lift and horizontal motion between the two pads when driven by a single linear actuator.
+- Joints whose stiffness and damping can later be tuned in MuJoCo to approximate bending and compliance.
+
+This candidate was chosen because it:
+
+- Captures the essential two‑anchor, lift‑and‑drag pattern of inchworm locomotion in a planar, rigid‑link form.
+- Is amenable to vector‑based kinematic analysis (as completed in Project Assignment 1) and to extension into a dynamic MuJoCo model.
+- Fits well within the foldable fabrication constraints (laminate layers, simple hinge patterns, low part count).
+- Provides clear design parameters (link lengths, stroke, joint stiffness, pad friction) for systematic study.
+
+**[TODO: Update candidate selection rationale after next iteration]**
+
+
+## Research Question and Rationale
+
+At a high level, the project asks:
+
+How do gait timing and geometry (period, stroke/stride length, and body configuration) influence the achievable speed and robustness of an inchworm‑inspired foldable crawler, in both simulation and experiment?
+
+The emerging research question focuses specifically on the relationship between:
+
+- Gait period and duty cycle (how long each pad is anchored vs sliding),
+- Effective stride length per cycle (net translation per actuation stroke),
+- Resulting average forward speed and basic energetic cost (work per unit distance and per unit weight),
+
+under variations in linkage geometry and contact properties.
+
+The rationale for emphasizing period/stride length and speed is:
+
+- Biomechanical studies of Manduca sexta show that larvae achieve a characteristic stride‑to‑body‑length ratio and operate in a relatively narrow range of gait frequencies. Matching or exploring deviations from these values provides a clear way to connect the mechanical design back to the biological reference.
+- In a foldable mechanism with limited actuator stroke, stride length is tightly constrained by geometry; understanding this mapping is critical for designing compact but effective crawlers.
+- For small robots with limited onboard energy and actuation authority, average speed and cost of transport are more informative performance metrics than peak velocity alone.
+
+The final wording of the research question will be refined once the dynamic model and initial experimental results are available.
+
+**[TODO: Insert finalized wording of research question on period/stride length and speed]**
+
+
+## Background Research and Existing Work
+
+Existing work on inchworm and caterpillar locomotion provides the biological and mechanical context for this project. Biomechanics studies of Manduca sexta describe how segments anchor and release in sequence, how body curvature evolves during a stride, and how ground‑reaction forces and frictional asymmetry contribute to net propulsion. These results provide realistic ranges for body length, stride length, gait period, curvature, and friction ratios that guide the design and scaling of the robot.
+
+On the robotics side, several inchworm‑style mechanisms have been proposed, including modular rigid crawlers, cable‑driven climbers, and soft crawling robots. Many of these systems implement the same fundamental pattern: two or more anchors with alternating high/low friction states and a central actuation unit that drives contraction and extension. Analytical models of slider–crank‑based crawlers provide direct relationships between link geometry and stride distance, while more recent soft‑robotic designs emphasize friction modulation and energy efficiency.
+
+Project Assignment 1 synthesized these sources into a set of target specifications and a kinematic mechanism concept for a foldable inchworm‑style crawler. :contentReference[oaicite:3]{index=3}
+
+
+### Collecting Design Criteria
+
+From the literature and the course context, the team is collecting design criteria along several dimensions, including:
+
+- Locomotion performance: stride length relative to body length, average speed, and repeatability over multiple cycles.
+- Stability and robustness: resistance to tipping, sensitivity to surface variations, and tolerance to small geometric or fabrication errors.
+- Contact and friction: required friction ratio between anchored and sliding states, pad size and pressure, and surface compatibility.
+- Manufacturability and integration: panel sizes, hinge patterns, assembly complexity, and compatibility with available actuation and control hardware.
+- Sim‑to‑real alignment: parameters that can be measured experimentally (mass, stiffness, damping, friction, actuator characteristics) and directly mapped into the MuJoCo model. 
+
+These criteria will be consolidated into a structured set of requirements that drive both the simulation models and the physical prototypes.
+
+**[TODO: Insert detailed design criteria table/list here]**
+
+
+## Key Information and Figures
+
+Several key conceptual and design figures will be introduced throughout the site to make the mechanism, gait, and performance measures clear.
+
+The first planned figure will be a schematic of the foldable inchworm robot showing the main components: front and rear rigid body sections, friction pads, internal linkage structure, and the primary actuator. This figure will help readers connect the abstract kinematic diagrams from Project Assignment 1 to the physical layout of the foldable mechanism.
+
+<!-- TODO: Figure 1 – Schematic of the inchworm-foldable robot and its main components. :contentReference[oaicite:5]{index=5} -->
+
+A second planned figure will illustrate the gait cycle as a sequence of configurations, including rear‑anchor/front‑slide, both‑anchored (looped posture), and front‑anchor/rear‑slide phases. The same figure can be used later to annotate sensor sites, pad states (anchored vs sliding), and key kinematic variables (e.g., body length, lift height).
+
+<!-- TODO: Figure 2 – Motion sequence showing key gait phases (anchor–release, lift–drag, and reset). -->
+
+To support the focus on period, stride length, and speed, a third figure will show representative trajectories or time histories from the MuJoCo simulations: body or pad position vs time over several cycles, highlighting how stride length and period combine into an average forward speed.
+
+<!-- TODO: Figure 3 – Example trajectories illustrating period, stride length, and average speed from MuJoCo simulations. -->
+
+Finally, a comparison figure will later juxtapose simulation snapshots and experimental images or video frames for the same gait parameters, emphasizing sim‑to‑real agreement (and discrepancy) in stride, timing, and posture.
+
+<!-- TODO: Figure 4 – Side-by-side comparison of simulated and experimental gait for a representative parameter set. -->
+
+
+## Goal Performance Metrics and Specifications
+
+To evaluate the design and guide parameter studies, the project will use a small set of scalar performance metrics that can be computed in both simulation and experiment. These include, at minimum:
+
+- Stride length per cycle and per body length.
+- Gait period and average forward speed.
+- Basic energetic measures such as work per cycle and cost of transport (where data permit).
+- Robustness indicators such as variance in stride length over multiple cycles.
+- Payload capability relative to robot weight, within the limits of the foldable structure and actuators.
+
+These metrics will be linked to a specification table that records design‑scale parameters (body length, mass, target friction ratios), actuation constraints (stroke, force/torque), and allowable ranges for joint stiffness and damping in the MuJoCo model. The specification table will be updated as the design is refined and as additional measurements are collected.
+
+**[TODO: Add finalized performance metrics and specifications table]**
+
+
+## Project Status and Next Steps
+
+At the current stage:
+
+- Project Assignment 1 is complete. The team has selected the inchworm‑inspired candidate, performed a focused literature review, defined preliminary performance targets, developed a kinematic model and Jacobian for the proposed mechanism, and drafted an initial specifications table. :contentReference[oaicite:6]{index=6}
+- A paper prototype and mechanism sketches have been created to validate the basic lift‑and‑drag motion and to check qualitative feasibility of the linkage topology within foldable fabrication constraints.
+- The public website structure is in place using the AcademicPages Jekyll template, and this “About” page serves as the top‑level entry point for the project. 
+
+Over the remainder of the semester, the planned next steps are:
+
+- Dynamic modeling: upgrade the kinematic mechanism into a full dynamic MuJoCo model with realistic masses, joint compliance, damping, actuators, and contact/friction parameters.
+- Parameter studies: use Python scripts to perform parameter sweeps (e.g., varying stroke, stiffness, friction coefficients) and compute performance metrics via MuJoCo sensors and state data.
+- Hardware build: fabricate and assemble a foldable prototype using the course’s laminate workflow, integrate actuators and simple control, and refine the design based on observed behavior.
+- Experimental campaign: collect motion and timing data (e.g., via phone video and tracking tools) across a range of gait and design parameters that match the simulation cases.
+- Sim‑to‑real comparison: analyze how well the dynamic model predicts stride length, period, speed, and qualitative posture, and document sources of mismatch (e.g., friction, compliance, backlash).
+- Documentation: update this website with figures, tables, and short video clips summarizing the modeling, parameter study, and experimental results, and link clearly to the MuJoCo model and analysis repository.
+
+**[TODO: Cross-check and align this overview with final Assignment 2 report structure and grading rubric.  ]**
