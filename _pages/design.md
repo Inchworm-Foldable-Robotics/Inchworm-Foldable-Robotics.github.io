@@ -12,7 +12,7 @@ Pre Design Concepts
 Before beginning any mechanical design work, we studied how inchworms generate motion and how previous robots have abstracted that gait into linkage based mechanisms. The three reference images (Inchworm Design 1–3) guided this explanation.
 
 
-1. Biological Gait Analysis
+1.Biological Gait Analysis
 The first image (Inchworm1) shows the natural inchworm motion cycle:
 
 
@@ -31,7 +31,7 @@ The first image (Inchworm1) shows the natural inchworm motion cycle:
 This sequence highlighted two key principles we needed to replicate mechanically: alternating anchoring and body arching that converts vertical motion into forward displacement.
 
 
-2. Robotic Gait Diagrams and Joint Behavior
+2.Robotic Gait Diagrams and Joint Behavior
 The second image (Inchworm2) presents a simplified kinematic interpretation of this gait. It shows how a small number of joints can recreate the arch extend reset pattern through controlled rotation. The diagram specifically illustrates:
 
 
@@ -47,7 +47,7 @@ The second image (Inchworm2) presents a simplified kinematic interpretation of t
 From this, we concluded that the mechanism could be reduced to a central folding joint and two end segments serving as controllable anchors.
 
 
-3. Geometric Parameters and Link Length Relationships
+3.Geometric Parameters and Link Length Relationships
 The third image (Inchworm3) shows a parametric sketch of a linkage based inchworm mechanism, introducing variables such as link lengths, hinge angles, and stride geometry. This diagram made clear that:
 
 
