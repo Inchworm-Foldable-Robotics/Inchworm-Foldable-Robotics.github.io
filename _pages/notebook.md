@@ -309,7 +309,7 @@ media.show_video(frames, fps = framerate)
 
 *Figure 4. MuJoCo model schematic showing the inchworm crawling at a period of .5 seconds*
 
-This sweep of the independent parameter highlights the optimized gait period in the simulation
+This sweep of the independent parameter highlights the optimized gait period in the simulation. This was a simple global approach to optimizing the x position distance, but it was effective and easiest to replicate in a real world setting.
 
 ---
 
@@ -356,218 +356,36 @@ plt.grid(True)
 
 *Figure 9. Tracking data of the inchworm crawling at all periods for comparison*
 
-
----
-
-# Results, Summary, and Discussion
-
-This section is where you will present and interpret the simulation results.
-
----
-
-## 2.1 Simulation Results
-
-Summarize the key trends from the parameter sweep:
-
-* How does the performance metric e.g., $$v_x$$ change with the design parameter?
-* Is there a clear optimum or plateau?
-* Are there regions where the gait fails (e.g., no net forward motion, excessive slip, instability)?
-
-**Suggested bullets:**
-
-* **Trend:**
-
-  * TODO: Describe whether performance increases, decreases, or has a peak vs. parameter.
-* **Optimal region:**
-
-  * TODO: State approximate best parameter value(s) and corresponding performance.
-* **Qualitative motion:**
-
-  * TODO: Note anything unusual in body posture or slip at different settings.
-
-**TODO:** Write 1–2 short paragraphs interpreting your simulation-only plots.
-
----
-
-![Simulation snapshots of the inchworm model at different phases of the gait](path/to/sim_snapshots.png)  
-*Figure 3. Simulation snapshots over one gait cycle, showing lift–drag locomotion for a representative parameter setting. TODO: render and capture images from MuJoCo.*
-
----
-
-## 3.2 Experimental Methods and Data Processing
-
-Describe how you collected physical data for the same parameter range:
-
-* **Experimental variable:** same parameter as in simulation (e.g., gait frequency, joint stiffness via hinge thickness, etc.).
-* **Setup:**
-
-  * Folded robot, actuation via servo/ESP32 control.
-  * Flat surface with known friction properties.
-  * Overhead or side-view camera for tracking.
-* **Measurement approach:**
-
-  * Obtain time–position data using Tracker (video analysis), IMU, or other sensors.
-  * Extract front pad or COM x-position vs. time.
-  * Compute average speed, stride length, etc., analogously to simulation.
-
-```python
-# This block shows an example of loading experimental tracking data from CSV
-# and computing average forward speed in the same way as the simulation.
-
-import pandas as pd
-
-def load_experimental_data(csv_path, x_column="x", t_column="t", x_offset=0.0):
-    """
-    Load experimental tracking data from a CSV file.
-
-    Parameters
-    ----------
-    csv_path : str
-        Path to the CSV file (e.g. exported from Tracker).
-    x_column : str
-        Column name for x-position.
-    t_column : str
-        Column name for time.
-    x_offset : float
-        Optional offset to align x with simulation origin.
-
-    Returns
-    -------
-    t_exp, x_exp : np.ndarray
-        Time and x-position arrays.
-    """
-    df = pd.read_csv(csv_path)
-    t_exp = df[t_column].to_numpy()
-    x_exp = (df[x_column].to_numpy() + x_offset)
-    return t_exp, x_exp
-
-def compute_average_speed_from_data(t, x):
-    """Compute average forward speed from experimental or simulated data."""
-    x_start = x[0]
-    x_end = x[-1]
-    t_end = t[-1]
-    return (x_end - x_start) / t_end
-
-# Example usage for one trial (TODO: adapt names and paths)
-# t_exp, x_exp = load_experimental_data("trial_f0p35.csv", x_column="x", t_column="t")
-# vx_exp = compute_average_speed_from_data(t_exp, x_exp)
-# print(f"Experimental average speed = {vx_exp:.4f} m/s")
-```
-
-**TODO:**
-
-* Document how many trials you ran per parameter value.
-* Note sources of noise (camera jitter, lighting, tracking errors) and how you mitigated them (e.g., smoothing, discarding outliers).
-
----
-
-![Photo of the physical inchworm robot on the test surface, with tracking markers visible](path/to/experimental_setup.png)
-*Figure 4. Experimental setup used to record inchworm locomotion: foldable robot, tracking markers, and camera geometry. TODO: insert actual photo.*
-
----
-
-## 3.3 Sim-to-Real Comparison
-
-Compare simulation and experiment for the **same** parameter values:
-
-* Overlay performance vs parameter plots (simulation vs experiment).
-* Wherever possible, overlay time–position traces for representative cases.
-
-```python
-# This block illustrates how to overlay simulation and experimental performance
-# as a function of the same design parameter.
-
-# Example: suppose you have experimental average speeds stored in arrays
-# param_vals_exp and vx_exp, aligned with param_vals_sim.
-
-plt.figure()
-plt.plot(param_vals_sim, vx_sim, "o-", label="Simulation")
-# TODO: load or compute vx_exp and param_vals_exp from CSVs
-# plt.plot(param_vals_exp, vx_exp, "s--", label="Experiment")
-
-plt.xlabel("Gait frequency [Hz]")  # or other parameter
-plt.ylabel("Average forward speed v_x [m/s]")
-plt.title("Simulation vs Experiment: Performance vs parameter")
-plt.grid(True)
-plt.legend()
-plt.tight_layout()
-plt.show()
-```
-
-**Discussion prompts (fill in as short paragraphs):**
-
-* **Qualitative agreement:**
-
-  * TODO: Describe whether the general trend (increasing, decreasing, peak) is consistent between simulation and experiment.
-* **Quantitative differences:**
-
-  * TODO: Note approximate percentage differences at key parameter values.
-* **Failure modes / anomalies:**
-
-  * TODO: Discuss any conditions where the robot behaves differently than predicted (e.g., stalling, sideways slip, saturation).
-
----
-
-![Overlay of simulation and experimental average speed vs. parameter](path/to/sim_vs_exp_speed.png)
-*Figure 5. Comparison of average forward speed from simulation and experiment across the parameter range. TODO: generate this figure once both datasets are available.*
-
 ---
 
 ## 3.4 Sources of Error and Model Limitations
 
-Summarize the likely reasons for discrepancies between simulation and experiment, tying back to modeling choices:
+Summarizing the likely reasons for discrepancies between simulation and experiment, tying back to modeling choices:
 
 * **Geometry and mass properties:**
 
   * Simplified link shapes vs real folded shell geometry.
   * Unmodeled mass distribution (e.g., wires, connectors).
+  * Scaling inconsistencies while building the model.
 * **Compliance modeling:**
 
   * Single torsional spring vs distributed flexure behavior.
+  * Bad RC Servo creating incorrect stiffness and damping paramters for the actuator.
   * Nonlinear stiffness or hysteresis not included.
 * **Contact and friction:**
 
-  * Coulomb friction with fixed coefficients vs real material behavior (velocity dependence, stick–slip).
-  * Sensitivity to pad normal force and surface roughness.
+  * Slight differences between experimental friction coefficients found in Assignment 5 vs. trial conditions while collecting real-world data.
+  * Sensitivity to foot normal force and surface roughness.
 * **Actuator and control:**
 
   * Idealized position actuator vs real servo limits (backlash, saturation, deadband).
   * Timing and phase errors in microcontroller code.
 * **Measurement noise:**
 
-  * Camera tracking, frame rate limitations, IMU drift.
+  * Camera tracking, frame rate limitations, human error in tracking placement
 
-**TODO:** Add 1–2 paragraphs here discussing which of these are dominant for your robot and how they affect the results.
 
 ---
 
-## 3.5 Conclusions and Future Work
 
-Wrap up with a brief, structured summary:
 
-* **Key findings from simulation:**
-
-  * TODO: e.g., “There exists an optimal gait frequency around X Hz that maximizes speed under the modeled friction and compliance.”
-* **Key findings from experiment:**
-
-  * TODO: e.g., “Experimentally, the best performance occurs at Y Hz, with maximum speed of Z mm/s.”
-* **Sim-to-real alignment:**
-
-  * TODO: comment on whether the model is “good enough” for design iteration.
-* **Proposed improvements (V2):**
-
-  * More accurate geometry and mass modeling.
-  * Multi-joint pseudo-rigid-body model for the flexure.
-  * Better friction characterization and implementation.
-  * Closed-loop feedback control in both simulation and experiment.
-
-Finally, note where this content will appear on the project website and in the video:
-
-* **Website:**
-
-  * Model description and parameter study in Assignment 2 section.
-  * Embedded plots and GIFs from both simulation and experiment.
-* **Video:**
-
-  * Short explanation of the model and parameter choice.
-  * Side-by-side clips of simulation and physical robot for a few parameter values. 
