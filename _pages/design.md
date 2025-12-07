@@ -27,6 +27,8 @@ The first image (Inchworm1) shows the natural inchworm motion cycle:
 
 * The rear releases and follows
 
+![Mechanism Geometry](../assets/03_Design/Inchworm1.jpg)
+<p align="center">Inchworm1</p> 
 
 This sequence highlighted two key principles we needed to replicate mechanically: alternating anchoring and body arching that converts vertical motion into forward displacement.
 
@@ -43,6 +45,8 @@ The second image (Inchworm2) presents a simplified kinematic interpretation of t
 
 * How joint states (free vs. locked) determine which segment acts as the anchor
 
+![Mechanism Geometry](../assets/03_Design/Inchworm2.jpg)
+<p align="center">Inchworm2</p> 
 
 From this, we concluded that the mechanism could be reduced to a central folding joint and two end segments serving as controllable anchors.
 
@@ -59,11 +63,16 @@ The third image (Inchworm3) shows a parametric sketch of a linkage based inchwor
 
 * a triangular or folded shape naturally produces the required arching motion
 
+![Mechanism Geometry](../assets/03_Design/Inchworm3.jpg)
+<p align="center">Inchworm3</p> 
 
 This confirmed that a triangular foldable structure with one actuated hinge could reproduce the biological gait while remaining easy to fabricate from sheet materials.
 
-# V1
+# V1 
 Version 1 represented the team’s first attempt to translate the inchworm gait into a mechanical form. The purpose of this initial model was not to create a functional prototype, but rather to establish a shared understanding of scale, geometry, and intended motion before progressing into detailed design. V1 served as a communication tool, ensuring that all team members aligned on the overall structure and spatial requirements of the mechanism.
+
+![Mechanism Geometry](../assets/03_Design/Inchworm4.jpg)
+<p align="center">Inchworm4</p> 
 
 Since V1 existed only as a digital assembly in SolidWorks, it did not include actuators or physical hinges. Instead, simple mate constraints were used to demonstrate the basic horizontal fold unfold motion envisioned for the mechanism. The model relied on mated edges rather than true joint definitions, reflecting its role as a conceptual layout rather than a manufacturable system.
 
@@ -77,6 +86,9 @@ The key lesson from V1 was the need to simplify. The mechanism was larger than n
 
 Version 2 marked the team’s transition into the new triangular architecture that would ultimately define the mechanism’s kinematics. The purpose of this iteration was to move away from the box based geometry of V1 and adopt the symmetric triangular form that more accurately represented the desired arching behavior. This shift was necessary to establish a stable baseline for upcoming MuJoCo simulations and to validate the simplified motion pathway envisioned for the mechanism.
 
+![Mechanism Geometry](../assets/03_Design/Inchwork5.jpg)
+<p align="center">Inchworm5</p> 
+
 The most significant change in V2 was the replacement of rectangular body segments with equal sided triangular panels. This geometry eliminated the bulkiness of the V1 design and created a cleaner, more consistent fold pattern. The team also removed the placeholder feet at this stage, choosing to focus solely on refining the body geometry before reintroducing anchoring features in later versions.
 
 Within SolidWorks, V2 was used to verify that the fold unfold motion remained similar to that of V1 despite the change in structure. The design successfully maintained the intended motion profile, demonstrating that the simplified two flap configuration could produce the same basic kinematic behavior with fewer moving parts. This reduction aligned with the team’s goal of improving reliability fewer joints reduce mechanical failure modes and simplify control.
@@ -86,6 +98,9 @@ No major issues were identified during the development of V2. Instead, this vers
 # V3
 
 Version 3 represented the team’s first attempt to transition from conceptual geometry into a fully manufacturable mechanism. Whereas Versions 1 and 2 focused on defining overall form and simplifying kinematic behavior, V3 aimed to introduce realistic hardware, establish structural frameworks suitable for fabrication, and explore mounting strategies for future actuation. This iteration served as the bridge between digital sketching and practical engineering considerations.
+
+![Mechanism Geometry](../assets/03_Design/Inchworm7.jpg)
+<p align="center">Inchworm6</p> 
 
 The most significant change in V3 was the introduction of real hinge hardware in place of the virtual mates used in earlier versions. The mechanism adopted a tab and slot panel design, reinforced with perimeter ribs to improve stiffness and better approximate the behavior of the final folded structure. The team also incorporated early motor mount geometries and began evaluating how solenoid actuators might integrate into the overall architecture. These additions required a more detailed internal framework and clearer definition of panel connections.
 
@@ -103,6 +118,9 @@ Functionally, V3 attempted to improve several mechanical characteristics:
 
 * Improved symmetry during the fold unfold motion
 
+![Mechanism Geometry](../assets/03_Design/Inchworm6.jpg)
+<p align="center">Inchworm7</p> 
+
 These goals required significantly more detail than in prior versions, and the resulting model exposed several important limitations. The added hardware substantially increased the estimated system weight, contradicting the simplicity desired for a foldable, lightweight prototype. The number of hinge components led to unexpected assembly complexity, and several clearance and interference issues emerged once real geometry was introduced. These observations prompted the team to reconsider the direction of the design.
 
 The key lesson from V3 was the importance of maintaining scope. The team recognized that the design had drifted toward unnecessary complexity introducing heavy materials, multiple hinges, and solenoid actuators before they were truly needed. This led to the decision to return to the five layer foldable material system used in class and to refocus on simplicity, weight reduction, and manufacturability. The insights gained in V3 directly shaped the more streamlined approach taken in subsequent iterations.
@@ -111,6 +129,11 @@ The key lesson from V3 was the importance of maintaining scope. The team recogni
 
 Version 4 represented the team’s first fully functional physical prototype and served as the culmination of all prior design iterations. The primary objectives of this version were to validate the finalized hinge pattern, integrate real actuation hardware, and demonstrate a complete servo driven inchworm gait using a foldable structure. Unlike previous digital only models, V4 embodied the final architectural choices and provided the first opportunity to evaluate the mechanism under realistic operating conditions.
 
+![Mechanism Geometry](../assets/03_Design/InchwormV2dxf.png)
+<p align="center">Inchworm8</p> 
+
+![Mechanism Geometry](../assets/03_Design/ManufacturingWorkflowOutput.png)
+<p align="center">Inchworm9</p> 
 A major improvement in V4 was the return to the five layer laminated foldable material, which had proven reliable during classroom exercises and offered the appropriate combination of stiffness, durability, and hinge compliance. The design was manufactured using laser cut panels with pre defined hinge slots, resulting in a clean, lightweight structure that folded into the intended triangular mechanism. This approach also removed the excessive hardware weight seen in V3, yielding a more biomechanically plausible configuration.
 
 V4 introduced full servo integration, replacing the heavier and more complex solenoid based concept previously explored. Three SG92R micro servos were embedded directly into the folding geometry: one for the central compression/retraction joint and two for front and rear anchoring actions. These were wired to an ESP32 microcontroller, allowing the team to implement and refine a synchronized control sequence for the gait cycle. The hinge layout and cut pattern translated effectively into real folding joints, forming the first version of the system with true mechanical compliance rather than simulated connections.
@@ -129,9 +152,6 @@ Although the prototype performed the expected motion, several limitations emerge
 
 The central takeaway from V4 was that, while the servo driven system achieved the correct overall motion direction and demonstrated a viable control architecture, rotary servos were not an ideal choice for producing vertical lifting forces at the hinges. A linear or non arcing actuator would likely improve lift efficiency and reduce mechanical interference. Nonetheless, V4 provided strong validation of the fold geometry, the five layer material approach, and the overall feasibility of achieving inchworm locomotion using a digitally fabricated hinge based body
 
-# Insparation 
-
-![Mechanism Geometry](../assets/03_Design/Inchworm1.png)
 
 
 ## Mountain Valley Design
