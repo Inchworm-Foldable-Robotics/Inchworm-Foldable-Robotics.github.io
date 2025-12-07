@@ -101,7 +101,7 @@ The research question aligns with the team’s combined skills:
 * **MuJoCo and Python:** building a dynamic model with compliant joints, actuator dynamics, and contact, then scripting parameter sweeps over gait period and logging sensor data.
 * **Experiment design and data analysis:** using phone‑based motion capture, friction tests, and timing control (e.g., microcontroller‑based gait timing) to measure speed and robustness across timing conditions. 
 
-These capabilities support the full Assignment 2 workflow: **design, build, simulate, and validate** the robot under controlled gait timing variations.
+These capabilities support the full Assignment 2 workflow: **design, build, simulate, and validate** the robot under controlled gait timing variations and make optimizations accordingly.
 
 #### Topic Fit
 
