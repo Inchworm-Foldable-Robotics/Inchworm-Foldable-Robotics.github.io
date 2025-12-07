@@ -60,7 +60,7 @@ This choice supports systematic design variations and sim‑to‑real comparison
 
 ### Research Question Rationale
 
-The updated research question places **gait timing (period)**—rather than geometry or material choice—as the primary design variable:
+The updated research question places **gait timing (period)** rather than geometry or material choice as the primary design variable:
 
 > **How does gait timing (period) influence the achievable speed and robustness of an inchworm-inspired foldable crawler, in both simulation and experiment?**
 
@@ -85,7 +85,7 @@ $$
 v = \frac{\Delta x_{\text{cycle}}}{T_{\text{gait}}}
 $$
 
-where $$\Delta x_{\text{cycle}}$$ is the net displacement per cycle and $$T_{\text{gait}}$$ is the gait period. Too fast a period may cause slip, loss of anchoring, or actuator saturation; too slow a period wastes available actuation bandwidth. Robustness—in this context—is defined in terms of:
+where $$\Delta x_{\text{cycle}}$$ is the net displacement per cycle and $$T_{\text{gait}}$$ is the gait period. Too fast a period may cause slip, loss of anchoring, or actuator saturation; too slow a period wastes available actuation bandwidth. Robustness in this context is defined in terms of:
 
 * Repeatable forward progress across cycles (low variance in $$\Delta x_{\text{cycle}}$$).
 * Tolerance to friction variation and minor geometry/fabrication errors.
