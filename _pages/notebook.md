@@ -51,16 +51,16 @@ The MuJoCo model represents the ArcFold mechanism as a small set of rigid bodies
 
 A concise summary of the main model elements is given in Table 1.
 
-| Element type | Name(s)                                       | Description                      |
-| ------------ | --------------------------------------------- | -------------------------------- |
+| Element type | Name(s)                                  | Description                      |
+| ------------ | ---------------------------------------- | -------------------------------- |
 | body         | `first_left`, `first_right`, `second_left`, `second_right` | Central body segments           |
-| body         | `foot1`                                      | Front pad body                   |
-| body         | `foot2`                                      | Rear pad body                    |
-| joint        | `mid_left`, `mid_right`                      | Main arching hinges (compliant) |
-| joint        | `foot1`                                      | Front pad pivot                  |
-| joint        | `foot2`                                      | Rear pad pivot                   |
-| body         | `end_effector`                               | COM / performance tracking site |
-| geom         | `ground`                                     | Ground plane                     |
+| body         | `foot1`                                  | Front pad body                   |
+| body         | `foot2`                                  | Rear pad body                    |
+| joint        | `mid_left`, `mid_right`                  | Main arching hinges (compliant)  |
+| joint        | `foot1`                                  | Front pad pivot                  |
+| joint        | `foot2`                                  | Rear pad pivot                   |
+| body         | `end_effector`                           | COM / performance tracking site  |
+| geom         | `ground`                                 | Ground plane                     |
 
 ---
 
