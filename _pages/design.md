@@ -312,6 +312,9 @@ The servos were connected to a breadboard mounted ESP32 microcontroller, followi
 
 This configuration enabled synchronized gait control, timing adjustments, and rapid debugging during prototype evaluation.
 
+![Schematic](../assets/03_Design/schematic.jpg)
+*Figure 14. ....*
+
 # Design Optimization
 
 After assembling the first working prototype, several rounds of optimization were performed to improve locomotion performance, structural consistency, and actuator behavior. These refinements were informed by a dozen iterative gait tests and targeted both the control logic and mechanical design.
@@ -343,7 +346,7 @@ Collectively, the PLA components produced one of the largest performance gains i
 
 ![3DPrint](../assets/03_Design/3dprint1.jpg)
 
-*Figure 14. 3D printed servo mounting bracket designed to stabilize the actuation 
+*Figure 15. 3D printed servo mounting bracket designed to stabilize the actuation 
 system. The bracket provides two reinforced pivot posts for attaching the servo 
 horn linkage and includes angled fins that prevent the laminated body panels from 
 over folding during compression. A slotted opening allows weight reduction and 
@@ -354,7 +357,7 @@ gait.*
 
 ![3DPrint](../assets/03_Design/3dprint2.jpg)
 
-*Figure 15. 3D printed mount for the central compression servo. The reinforced posts 
+*Figure 16. 3D printed mount for the central compression servo. The reinforced posts 
 provide a fixed pivot location for the servo horn, allowing the actuator to pull 
 the two main body flaps together during the contraction phase. The flat base ensures 
 stable bonding to the laminated structure, while the angled geometry aligns the 
@@ -363,7 +366,7 @@ servo output with the hinge axis for smoother and more efficient motion.*
 
 ![3DPrint](../assets/03_Design/3dprint3.jpg)
 
-*Figure 16. 3D printed flap connector used as the opposing pivot point for the 
+*Figure 17. 3D printed flap connector used as the opposing pivot point for the 
 compression servo. This part attaches to the far side of the hinged flap and 
 provides a smooth, rounded interface for the servo horn linkage to pull against. 
 The single reinforced hole defines a stable hinge axis, ensuring that the flaps 
