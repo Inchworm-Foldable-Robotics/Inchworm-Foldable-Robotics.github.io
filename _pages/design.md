@@ -345,7 +345,7 @@ Special fins were added to prevent over-rotation of panelsâ€”a problem observed 
 
 Collectively, the PLA components produced one of the largest performance gains in the optimization process.
 
-![3DPrint](../assets/03_Design/3dprint1.jpg)
+![3DPrint](../assets/03_Design/3dprint-1.jpg)
 
 *Figure 15. 3D printed servo mounting bracket designed to stabilize the actuation 
 system. The bracket provides two reinforced pivot posts for attaching the servo 
@@ -356,7 +356,7 @@ reduced hinge stress, and significantly increased the consistency of the robotâ€
 gait.*
 
 
-![3DPrint](../assets/03_Design/3dprint2.jpg)
+![3DPrint](../assets/03_Design/3dprint-2.jpg)
 
 *Figure 16. 3D printed mount for the central compression servo. The reinforced posts 
 provide a fixed pivot location for the servo horn, allowing the actuator to pull 
@@ -365,7 +365,7 @@ stable bonding to the laminated structure, while the angled geometry aligns the
 servo output with the hinge axis for smoother and more efficient motion.*
 
 
-![3DPrint](../assets/03_Design/3dprint3.jpg)
+![3DPrint](../assets/03_Design/3dprint-3.jpg)
 
 *Figure 17. 3D printed flap connector used as the opposing pivot point for the 
 compression servo. This part attaches to the far side of the hinged flap and 
