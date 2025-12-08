@@ -311,3 +311,46 @@ The servos were connected to a breadboard mounted ESP32 microcontroller, followi
 * A shared 5V rail and ground line powered all actuators
 
 This configuration enabled synchronized gait control, timing adjustments, and rapid debugging during prototype evaluation.
+
+# Design Optimization
+
+After assembling the first working prototype, several rounds of optimization were performed to improve locomotion performance, structural consistency, and actuator behavior. These refinements were informed by a dozen iterative gait tests and targeted both the control logic and mechanical design.
+
+## Servo Timing Refinement
+
+Early tests showed that improper servo sequencing caused slipping, backward motion, and inconsistent stride lengths. The team explored roughly twelve different timing configurations before converging on the most effective pattern. The optimal sequence was:
+
+foot engage → body compress → foot release
+
+This phasing ensured that the anchoring servo had fully settled before the body applied load, reducing slipping and improving motion consistency. Although the improvement in stride length was modest, the updated timing significantly improved directional stability, helping the prototype move reliably in the intended direction rather than oscillating or drifting.
+
+The optimized timing also established a measurable cycle period and duty cycle, enabling more structured testing and future simulation comparisons.
+
+## 3D-Printed Brackets and Anti-Overfold Fins
+
+Mechanical issues in earlier prototypes originated from servo misalignment, hinge stress, and the panels folding back into themselves during aggressive actuation. To address these issues, the team introduced custom PLA 3D-printed brackets. These served three key functions:
+
+1. Improved Servo Alignment:
+The brackets provided consistent mounting geometry, allowing servos to apply torque efficiently without twisting or shearing the laminated body. This resulted in smoother lifting and more predictable hinge rotation.
+
+2. Structural Reinforcement:
+The brackets stiffened the attachment points, reducing deformation and improving control over the linkage motion.
+
+3. Anti-Overfold Fins:
+Special fins were added to prevent over-rotation of panels—a problem observed during testing. These fins successfully eliminated overfolding, ensuring the mechanism operated within its intended range of motion.
+
+Collectively, the PLA components produced one of the largest performance gains in the optimization process.
+
+## Friction Enhancement Using Hot Glue Feet
+
+Slipping was a consistent limitation across early prototypes, especially on smooth tabletops. To increase traction without adding weight or mechanical complexity, the team applied thin lines of hot glue along the outer edges of the end panels. The rubber-like texture of the glue provided a simple but highly effective friction interface.
+
+Glue was added incrementally—testing, observing, and reapplying until adequate grip was achieved. This tuning process resulted in a substantial improvement in anchoring performance across multiple surfaces, making it the single biggest optimization alongside the 3D-printed brackets.
+
+## Remaining Limitations
+
+Despite these improvements, the prototype still faced some performance constraints:
+
+* Servo speed remained a bottleneck, limiting the achievable gait frequency. Faster or higher-torque actuators could further improve stride efficiency and motion smoothness.
+
+* No optimizations were removed during iteration, as each continued to support the stability and functionality of the final design.
