@@ -270,7 +270,7 @@ pressing and final cutting.*
 
 ![Mountain Valley](../assets/03_Design/20251104_161237.jpg)
 
-*Figure X. Fully separated laminated hinge sheet after laser cutting. The individual 
+*Figure 13. Fully separated laminated hinge sheet after laser cutting. The individual 
 panels and living hinges are visible, forming the flat layout that will fold into 
 the inchworm body. This stage verifies that all hinge kerfs cut cleanly through the 
 cardstock layers while preserving the hinge film needed for flexible motion.*
@@ -340,6 +340,36 @@ The brackets stiffened the attachment points, reducing deformation and improving
 Special fins were added to prevent over-rotation of panels—a problem observed during testing. These fins successfully eliminated overfolding, ensuring the mechanism operated within its intended range of motion.
 
 Collectively, the PLA components produced one of the largest performance gains in the optimization process.
+
+![3DPrint](../assets/03_Design/3dprint1.jpg)
+
+*Figure 14. 3D printed servo mounting bracket designed to stabilize the actuation 
+system. The bracket provides two reinforced pivot posts for attaching the servo 
+horn linkage and includes angled fins that prevent the laminated body panels from 
+over folding during compression. A slotted opening allows weight reduction and 
+provides space for wiring or mechanical clearance. This part improved alignment, 
+reduced hinge stress, and significantly increased the consistency of the robot’s 
+gait.*
+
+
+![3DPrint](../assets/03_Design/3dprint2.jpg)
+
+*Figure 15. 3D printed mount for the central compression servo. The reinforced posts 
+provide a fixed pivot location for the servo horn, allowing the actuator to pull 
+the two main body flaps together during the contraction phase. The flat base ensures 
+stable bonding to the laminated structure, while the angled geometry aligns the 
+servo output with the hinge axis for smoother and more efficient motion.*
+
+
+![3DPrint](../assets/03_Design/3dprint3.jpg)
+
+*Figure 16. 3D printed flap connector used as the opposing pivot point for the 
+compression servo. This part attaches to the far side of the hinged flap and 
+provides a smooth, rounded interface for the servo horn linkage to pull against. 
+The single reinforced hole defines a stable hinge axis, ensuring that the flaps 
+move symmetrically during contraction and preventing unwanted twisting of the 
+laminated structure.*
+
 
 ## Friction Enhancement Using Hot Glue Feet
 
