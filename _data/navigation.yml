@@ -23,7 +23,7 @@ main:
   # - title: "Blog Posts"
   #   url: /year-archive/
 
-  - title: "Jupyter Notebook"
+  - title: "Model and Simulation"
     url: /notebook/
   
   - title: "Design"

@@ -9,7 +9,7 @@ author_profile: true
 
 ---
 
-# Dynamic MuJoCo Model and Simulation Methods
+<!-- # Dynamic MuJoCo Model and Simulation Methods -->
 
 This page documents how the ArcFold inchworm-inspired foldable robot is converted from the Assignment 1 kinematic concept into a dynamic MuJoCo model with compliance, actuators, and performance tracking, as required for Project Assignment 2. The same model is used to study how gait timing (period) influences the achievable speed and robustness of the Sarrus‑linkage inchworm crawler, in parallel with experiments on the physical prototype.
 
@@ -392,7 +392,9 @@ xml_template = '''
 The Python script below creates a MuJoCo simulation instance from the XML template, applies a periodic gait defined by square‑wave joint targets, and records the motion of the `end_effector` for a given gait period. The example shown uses a 4 s gait period; identical code is reused for the 2 s, 1 s, and 0.5 s cases with only the frequency `freq` changed.
 
 ```python
-# This block is the creation of the simulation for the Mujoco model, at a specified period of 4 seconds. It is repeated for all periods tested, but the repeat code will not be shown for brevity. A .gif of the simulation will play at the bottom.
+# This block is the creation of the simulation for the Mujoco model, at a specified period of 4 seconds. 
+# It is repeated for all periods tested, but the repeat code will not be shown for brevity. 
+# A .gif of the simulation will play at the bottom.
 
 ################## Period 4 seconds #########################
 xml = xml_template.format(k_motor =15.42, # found through trial and error
