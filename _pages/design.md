@@ -81,7 +81,7 @@ This confirmed that a triangular foldable structure with one actuated hinge coul
 # V1 
 Version 1 represented the team’s first attempt to translate the inchworm gait into a mechanical form. The purpose of this initial model was not to create a functional prototype, but rather to establish a shared understanding of scale, geometry, and intended motion before progressing into detailed design. V1 served as a communication tool, ensuring that all team members aligned on the overall structure and spatial requirements of the mechanism.
 
-![Mechanism Geometry](../assets/03_Design/Inchworm-4.jpg)
+![Mechanism Geometry](../assets/03_Design/Inchworm-4.jpg)  
 
 *Figure 4. Version 1 CAD concept of the inchworm mechanism. This early model was 
 used to explore the overall shape, approximate size, and intended fold motion. 
@@ -312,8 +312,9 @@ The servos were connected to a breadboard mounted ESP32 microcontroller, followi
 
 This configuration enabled synchronized gait control, timing adjustments, and rapid debugging during prototype evaluation.
 
-![Schematic](../assets/03_Design/schematic.jpg)
-*Figure 14. ....*
+![Schematic](../assets/03_Design/schematic.jpg)  
+
+*Figure 14. Electrical Schematic*
 
 # Design Optimization
 
