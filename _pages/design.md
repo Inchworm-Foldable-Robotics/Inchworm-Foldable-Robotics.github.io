@@ -27,8 +27,9 @@ The first image (Inchworm1) shows the natural inchworm motion cycle:
 
 * The rear releases and follows
 
-![Mechanism Geometry](../assets/03_Design/Inchworm1.jpg)
-<p align="center">Inchworm1</p> 
+![Mechanism Geometry](../assets/03_Design/Inchworm-1.jpg)
+
+*Figure 1. Kinematic model of an inchworm inspired linkage mechanism. The diagram illustrates how extension and contraction are generated through a series of rigid links defined by lengths a, b, y, and z. As the central joint rotates between θ_max and θ_min, the upper triangular section lifts and repositions the body. The rear anchor remains fixed while the front segment advances, producing a net forward displacement l per cycle. This simplified model highlights the geometric relationships that govern stride length and the range of motion achievable in inchworm style locomotion.*
 
 This sequence highlighted two key principles we needed to replicate mechanically: alternating anchoring and body arching that converts vertical motion into forward displacement.
 
@@ -45,8 +46,9 @@ The second image (Inchworm2) presents a simplified kinematic interpretation of t
 
 * How joint states (free vs. locked) determine which segment acts as the anchor
 
-![Mechanism Geometry](../assets/03_Design/Inchworm2.jpg)
-<p align="center">Inchworm2</p> 
+![Mechanism Geometry](../assets/03_Design/Inchworm-2.jpg)
+
+*Figure 2. Transition between minimum angle and mid-swing configurations in the inchworm linkage. The solid lines represent the mechanism in its fully contracted state, defined by the minimum joint angle θ_min. As the central joint opens, the linkage follows the dashed trajectory, lifting the body and advancing the free end forward. This diagram highlights how rotation at a single joint produces both vertical elevation and horizontal displacement, enabling the inchworm style lift and drag gait.*
 
 From this, we concluded that the mechanism could be reduced to a central folding joint and two end segments serving as controllable anchors.
 
@@ -63,16 +65,31 @@ The third image (Inchworm3) shows a parametric sketch of a linkage based inchwor
 
 * a triangular or folded shape naturally produces the required arching motion
 
-![Mechanism Geometry](../assets/03_Design/Inchworm3.jpg)
-<p align="center">Inchworm3</p> 
+![Mechanism Geometry](../assets/03_Design/Inchworm-3.jpg)
+
+*Figure 3. Biological inchworm gait compared with a mechanical linkage model. 
+The left side shows the natural lift and drag motion of an inchworm as it anchors 
+its rear end, arches upward, and moves the front end forward before contracting. 
+The right side illustrates the equivalent mechanical sequence, where joints switch 
+between active and inactive states and the front and rear anchors alternate between 
+attached and released. Across stages t0 through t4, coordinated joint rotation 
+produces lifting and forward motion, resulting in a net stride length.*
+ 
 
 This confirmed that a triangular foldable structure with one actuated hinge could reproduce the biological gait while remaining easy to fabricate from sheet materials.
 
 # V1 
 Version 1 represented the team’s first attempt to translate the inchworm gait into a mechanical form. The purpose of this initial model was not to create a functional prototype, but rather to establish a shared understanding of scale, geometry, and intended motion before progressing into detailed design. V1 served as a communication tool, ensuring that all team members aligned on the overall structure and spatial requirements of the mechanism.
 
-![Mechanism Geometry](../assets/03_Design/Inchworm4.jpg)
-<p align="center">Inchworm4</p> 
+![Mechanism Geometry](../assets/03_Design/Inchworm-4.jpg)
+
+*Figure 4. Version 1 CAD concept of the inchworm mechanism. This early model was 
+used to explore the overall shape, approximate size, and intended fold motion. 
+The design included box shaped body segments and feet but was not 
+intended for fabrication. Instead, it served as a communication and planning tool 
+to visualize how the central panel would fold and how the mechanism might contract 
+and extend during a gait cycle.*
+ 
 
 Since V1 existed only as a digital assembly in SolidWorks, it did not include actuators or physical hinges. Instead, simple mate constraints were used to demonstrate the basic horizontal fold unfold motion envisioned for the mechanism. The model relied on mated edges rather than true joint definitions, reflecting its role as a conceptual layout rather than a manufacturable system.
 
@@ -86,8 +103,12 @@ The key lesson from V1 was the need to simplify. The mechanism was larger than n
 
 Version 2 marked the team’s transition into the new triangular architecture that would ultimately define the mechanism’s kinematics. The purpose of this iteration was to move away from the box based geometry of V1 and adopt the symmetric triangular form that more accurately represented the desired arching behavior. This shift was necessary to establish a stable baseline for upcoming MuJoCo simulations and to validate the simplified motion pathway envisioned for the mechanism.
 
-![Mechanism Geometry](../assets/03_Design/Inchwork5.jpg)
-<p align="center">Inchworm5</p> 
+![Mechanism Geometry](../assets/03_Design/Inchwork-5.jpg)
+
+*Figure 5. Version 2 simplified linkage model. This design introduced the triangular 
+folding geometry and reduced moving parts, allowing the team to validate the basic 
+inchworm style fold and unfold behavior.*
+ 
 
 The most significant change in V2 was the replacement of rectangular body segments with equal sided triangular panels. This geometry eliminated the bulkiness of the V1 design and created a cleaner, more consistent fold pattern. The team also removed the placeholder feet at this stage, choosing to focus solely on refining the body geometry before reintroducing anchoring features in later versions.
 
@@ -99,8 +120,14 @@ No major issues were identified during the development of V2. Instead, this vers
 
 Version 3 represented the team’s first attempt to transition from conceptual geometry into a fully manufacturable mechanism. Whereas Versions 1 and 2 focused on defining overall form and simplifying kinematic behavior, V3 aimed to introduce realistic hardware, establish structural frameworks suitable for fabrication, and explore mounting strategies for future actuation. This iteration served as the bridge between digital sketching and practical engineering considerations.
 
-![Mechanism Geometry](../assets/03_Design/Inchworm7.jpg)
-<p align="center">Inchworm6</p> 
+![Mechanism Geometry](../assets/03_Design/Inchworm-7.jpg)
+
+*Figure 6. Version 3 CAD assembly incorporating real hinge hardware and structural 
+features. This iteration introduced 3D printed hinge brackets, tab and slot panel 
+construction, and mounting geometry for potential actuators. V3 served as the 
+first manufacturable design and was used to evaluate rigidity, hinge clearance, 
+and mechanical behavior before transitioning to the laminated foldable prototype.*
+ 
 
 The most significant change in V3 was the introduction of real hinge hardware in place of the virtual mates used in earlier versions. The mechanism adopted a tab and slot panel design, reinforced with perimeter ribs to improve stiffness and better approximate the behavior of the final folded structure. The team also incorporated early motor mount geometries and began evaluating how solenoid actuators might integrate into the overall architecture. These additions required a more detailed internal framework and clearer definition of panel connections.
 
@@ -118,8 +145,14 @@ Functionally, V3 attempted to improve several mechanical characteristics:
 
 * Improved symmetry during the fold unfold motion
 
-![Mechanism Geometry](../assets/03_Design/Inchworm6.jpg)
-<p align="center">Inchworm7</p> 
+![Mechanism Geometry](../assets/03_Design/Inchworm-6.jpg)
+
+*Figure 7. Wireframe view of the Version 3 mechanical assembly. This model shows 
+the full hinge network, 3D printed brackets, and internal mounting structures that 
+were explored during this iteration. The wireframe visualization was used to study 
+clearances, hinge motion paths, and potential interference between structural members 
+before committing to fabrication. V3 provided the detailed mechanical groundwork that 
+informed the simplified laminated design used in the final prototype.* 
 
 These goals required significantly more detail than in prior versions, and the resulting model exposed several important limitations. The added hardware substantially increased the estimated system weight, contradicting the simplicity desired for a foldable, lightweight prototype. The number of hinge components led to unexpected assembly complexity, and several clearance and interference issues emerged once real geometry was introduced. These observations prompted the team to reconsider the direction of the design.
 
@@ -130,10 +163,22 @@ The key lesson from V3 was the importance of maintaining scope. The team recogni
 Version 4 represented the team’s first fully functional physical prototype and served as the culmination of all prior design iterations. The primary objectives of this version were to validate the finalized hinge pattern, integrate real actuation hardware, and demonstrate a complete servo driven inchworm gait using a foldable structure. Unlike previous digital only models, V4 embodied the final architectural choices and provided the first opportunity to evaluate the mechanism under realistic operating conditions.
 
 ![Mechanism Geometry](../assets/03_Design/InchwormV2dxf.png)
-<p align="center">Inchworm8</p> 
+
+*Figure 8. LibreCAD layout of the foldable inchworm mechanism. This file defines 
+the complete 2D cut pattern used for fabrication, including outer contours, hinge 
+lines, and servo mounting slots. Color coded layers distinguish cut depths and 
+fold types, allowing the laser cutter to produce accurate mountain folds, valley 
+folds, and through cuts. The annotated dimensions were used to verify the overall 
+footprint and ensure alignment across all five laminate layers.*
 
 ![Mechanism Geometry](../assets/03_Design/ManufacturingWorkflowOutput.png)
-<p align="center">Inchworm9</p> 
+
+*Figure 9. Final fold pattern used for the five layer laminated inchworm body. 
+The diagram identifies the cut lines, mountain folds, and valley folds required 
+to create the triangular cross section and hinged center joint. Servo mounting 
+slots are included at both ends to support front and rear anchoring actuators. 
+This pattern served as the master template for all laser cut laminate layers.*
+
 A major improvement in V4 was the return to the five layer laminated foldable material, which had proven reliable during classroom exercises and offered the appropriate combination of stiffness, durability, and hinge compliance. The design was manufactured using laser cut panels with pre defined hinge slots, resulting in a clean, lightweight structure that folded into the intended triangular mechanism. This approach also removed the excessive hardware weight seen in V3, yielding a more biomechanically plausible configuration.
 
 V4 introduced full servo integration, replacing the heavier and more complex solenoid based concept previously explored. Three SG92R micro servos were embedded directly into the folding geometry: one for the central compression/retraction joint and two for front and rear anchoring actions. These were wired to an ESP32 microcontroller, allowing the team to implement and refine a synchronized control sequence for the gait cycle. The hinge layout and cut pattern translated effectively into real folding joints, forming the first version of the system with true mechanical compliance rather than simulated connections.
@@ -154,11 +199,20 @@ The central takeaway from V4 was that, while the servo driven system achieved th
 
 # Fabrication Process
 
-The fabrication of the final inchworm prototype followed a multi-stage workflow designed to integrate foldable-mechanism construction with embedded actuation hardware. The team employed the standard five-layer laminate approach used in class, enabling the structure to behave as a lightweight but durable foldable linkage system.
+The fabrication of the final inchworm prototype followed a multi stage workflow designed to integrate foldable mechanism construction with embedded actuation hardware. The team employed the standard five layer laminate approach used in class, enabling the structure to behave as a lightweight but durable foldable linkage system.
+
+![Mountain Valley](../assets/03_Design/01_MountainValleyFoldableRobotics.png)
+
+*Figure 10. Annotated folding diagram showing cut lines, mountain folds, valley 
+folds, and glue tab locations. Sections labeled A and B indicate panel groups 
+that fold together during assembly. This template provided guidance for creating 
+the correct hinge behavior in the laminate and ensured consistent construction 
+across prototypes.*
+
 
 ## Material Stack Preparation
 
-Each mechanism was constructed from a five-layer composite stack consisting of:
+Each mechanism was constructed from a five layer composite stack consisting of:
 
 * Outer cardstock layer
 
@@ -186,25 +240,46 @@ All fabrication steps were performed using a laser cutter in two primary passes:
 
 2. Final Outline Cutting
 
-* After lamination, the completed sheet was returned to the cutter for a full-depth pass that released the perimeter of the mechanism and created the final shape.
+* After lamination, the completed sheet was returned to the cutter for a full depth pass that released the perimeter of the mechanism and created the final shape.
 
 Registration holes in each sheet aligned with four fixture pins allowed precise layer stacking and minimized error in hinge positioning.
 
-![Mountain Valley](../assets/03_Design/01_MountainValleyFoldableRobotics.png)
+![Mountain Valley](../assets/03_Design/IMG_9922.jpg)
+
+*Figure 11. Laser cutting process used to produce the hinge patterns for the laminated 
+inchworm body. The machine performs shallow passes to score mountain and valley 
+folds before cutting the full outline. Precise registration ensures that all five 
+laminate layers align correctly during fabrication.*
+
 
 ## Lamination and Forming
 
-Following the hinge-pattern cuts, the five sheets were stacked onto alignment pins and pressed together.
+Following the hinge pattern cuts, the five sheets were stacked onto alignment pins and pressed together.
 The assembly was then placed into a heat press, activating the adhesive layers and bonding the stack into a single laminated sheet.
-Once cooled, the laminate preserved the hinge-film flexibility while forming rigid structural panels.
+Once cooled, the laminate preserved the hinge film flexibility while forming rigid structural panels.
 
-The fully laminated piece was then placed back into the laser cutter, where the outer contour and servo-mount openings were cut cleanly through all layers.
+The fully laminated piece was then placed back into the laser cutter, where the outer contour and servo mount openings were cut cleanly through all layers.
+
+![Mountain Valley](../assets/03_Design/20251104_161223.jpg)
+
+*Figure 12. Lasercut hinge layer removed from the cutter bed. The scored mountain 
+and valley fold lines are visible within the central grid, while the outer contour 
+remains connected to the frame for easy handling. Alignment holes in the corners 
+allow this sheet to be stacked precisely with the other laminate layers before 
+pressing and final cutting.*
+
+![Mountain Valley](../assets/03_Design/20251104_161237.jpg)
+
+*Figure X. Fully separated laminated hinge sheet after laser cutting. The individual 
+panels and living hinges are visible, forming the flat layout that will fold into 
+the inchworm body. This stage verifies that all hinge kerfs cut cleanly through the 
+cardstock layers while preserving the hinge film needed for flexible motion.*
 
 ## Mechanical Assembly
 
 After the mechanism was removed from the sheet:
 
-* The two overlapping square panels at the central joint were hot-glued together, forming the primary rotation surface for the actuation servo.
+* The two overlapping square panels at the central joint were hot glued together, forming the primary rotation surface for the actuation servo.
 
 * Remaining folds were manually creased along their mountain/valley lines to ensure smooth mechanical action.
 
@@ -212,7 +287,7 @@ After the mechanism was removed from the sheet:
 
 ## Servo Integration
 
-Three SG92R micro-servos were installed:
+Three SG92R micro servos were installed:
 
 1. Central compression/retraction servo
 
@@ -220,12 +295,12 @@ Three SG92R micro-servos were installed:
 
 3. Rear anchoring servo
 
-Each servo was hot-glued into its designated cavity and oriented so that its horn directly actuated the nearest hinge panel.
+Each servo was hot glued into its designated cavity and oriented so that its horn directly actuated the nearest hinge panel.
 This method prioritized weight reduction over structural permanence, allowing rapid iteration and adjustment during testing.
 
 ## Electronics and Control Wiring
 
-The servos were connected to a breadboard-mounted ESP32 microcontroller, following the wiring diagram developed for V4:
+The servos were connected to a breadboard mounted ESP32 microcontroller, following the wiring diagram developed for V4:
 
 * GPIO13 → Front foot servo
 
