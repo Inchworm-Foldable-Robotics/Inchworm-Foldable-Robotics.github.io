@@ -30,7 +30,7 @@ The current work is organized around the following research question:
 
 > **How does gait timing (period) influence the achievable speed and robustness of an inchworm-inspired foldable crawler, in both simulation and experiment?**
 
-This home page summarizes how that question connects to the team’s goals, the biological and robotic background, and the design–build–simulate–compare workflow of Project Assignment 2.
+This home page summarizes how that question connects to the team’s goals, the biological and robotic background, and the design build simulate compare workflow of Project Assignment 2.
 
 ## Team Goals
 

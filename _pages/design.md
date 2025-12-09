@@ -283,7 +283,7 @@ After the mechanism was removed from the sheet:
 
 * Remaining folds were manually creased along their mountain/valley lines to ensure smooth mechanical action.
 
-* The body was shaped into its triangular cross-section consistent with earlier design iterations.
+* The body was shaped into its triangular cross section consistent with earlier design iterations.
 
 ## Servo Integration
 
@@ -333,9 +333,9 @@ This phasing ensured that the anchoring servo had fully settled before the body 
 
 The optimized timing also established a measurable cycle period and duty cycle, enabling more structured testing and future simulation comparisons.
 
-## 3D-Printed Brackets and Anti-Overfold Fins
+## 3D Printed Brackets and Anti Overfold Fins
 
-Mechanical issues in earlier prototypes originated from servo misalignment, hinge stress, and the panels folding back into themselves during aggressive actuation. To address these issues, the team introduced custom PLA 3D-printed brackets. These served three key functions:
+Mechanical issues in earlier prototypes originated from servo misalignment, hinge stress, and the panels folding back into themselves during aggressive actuation. To address these issues, the team introduced custom PLA 3D printed brackets. These served three key functions:
 
 1. Improved Servo Alignment:
 The brackets provided consistent mounting geometry, allowing servos to apply torque efficiently without twisting or shearing the laminated body. This resulted in smoother lifting and more predictable hinge rotation.
@@ -343,8 +343,8 @@ The brackets provided consistent mounting geometry, allowing servos to apply tor
 2. Structural Reinforcement:
 The brackets stiffened the attachment points, reducing deformation and improving control over the linkage motion.
 
-3. Anti-Overfold Fins:
-Special fins were added to prevent over-rotation of panels—a problem observed during testing. These fins successfully eliminated overfolding, ensuring the mechanism operated within its intended range of motion.
+3. Anti Overfold Fins:
+Special fins were added to prevent over rotation of panels—a problem observed during testing. These fins successfully eliminated overfolding, ensuring the mechanism operated within its intended range of motion.
 
 Collectively, the PLA components produced one of the largest performance gains in the optimization process.
 
@@ -380,14 +380,14 @@ laminated structure.*
 
 ## Friction Enhancement Using Hot Glue Feet
 
-Slipping was a consistent limitation across early prototypes, especially on smooth tabletops. To increase traction without adding weight or mechanical complexity, the team applied thin lines of hot glue along the outer edges of the end panels. The rubber-like texture of the glue provided a simple but highly effective friction interface.
+Slipping was a consistent limitation across early prototypes, especially on smooth tabletops. To increase traction without adding weight or mechanical complexity, the team applied thin lines of hot glue along the outer edges of the end panels. The rubber like texture of the glue provided a simple but highly effective friction interface.
 
-Glue was added incrementally—testing, observing, and reapplying until adequate grip was achieved. This tuning process resulted in a substantial improvement in anchoring performance across multiple surfaces, making it the single biggest optimization alongside the 3D-printed brackets.
+Glue was added incrementally—testing, observing, and reapplying until adequate grip was achieved. This tuning process resulted in a substantial improvement in anchoring performance across multiple surfaces, making it the single biggest optimization alongside the 3D printed brackets.
 
 ## Remaining Limitations
 
 Despite these improvements, the prototype still faced some performance constraints:
 
-* Servo speed remained a bottleneck, limiting the achievable gait frequency. Faster or higher-torque actuators could further improve stride efficiency and motion smoothness.
+* Servo speed remained a bottleneck, limiting the achievable gait frequency. Faster or higher torque actuators could further improve stride efficiency and motion smoothness.
 
 * No optimizations were removed during iteration, as each continued to support the stability and functionality of the final design.
