@@ -5,25 +5,27 @@ permalink: /results/
 author_profile: true
 ---
 
-![](..\assets\04_Results\P4_Inchworm_Good)
+In this section, the team displays the results of experimentation in both video and graph, and discusses the differences between trials.
+
+![](..\assets\04_Results\P4_Inchworm_Good.mp4)
 
 ![](..\assets\04_Results\ActP4.png)  
 
 *Figure 1. Experimental data of the inchworm at a period of 4 seconds*
 
-![](..\assets\04_Results\P2_Inchworm_Good)
+![](..\assets\04_Results\P2_Inchworm_Good.mp4)
 
 ![](..\assets\04_Results\ActP2.png)  
 
 *Figure 2. Experimental data of the inchworm at a period of 2 seconds. As can be seen, some of the data got distorted during tracking. This has been taken into account and will not affect analysis*
 
-![](..\assets\04_Results\P1_Inchworm_Good)
+![](..\assets\04_Results\P1_Inchworm_Good.mp4)
 
 ![](..\assets\04_Results\ActP1.png)  
 
 *Figure 3. Experimental data of the inchworm at a period of 1 second*
 
-![](..\assets\04_Results\P.5_Inchworm_Good)
+![](..\assets\04_Results\P.5_Inchworm_Good.mp4)
 
 ![](..\assets\04_Results\ActP_5.png)  
 
