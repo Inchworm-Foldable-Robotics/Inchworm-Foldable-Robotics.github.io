@@ -563,6 +563,10 @@ This section summarizes likely sources of discrepancy between the MuJoCo simulat
 These limitations explain why the simulations tend to be more repeatable and slightly optimistic in speed compared with the hardware results, particularly at slower gait periods where real‑world slip, compliance losses, and servo saturation are more pronounced.
 
 
+
+Here is a link to the .ipynb: 
+- [Inchworm](https://github.com/Inchworm-Foldable-Robotics/Mujoco-model/blob/main/Inchworm.ipynb)
+
 ---
 
 

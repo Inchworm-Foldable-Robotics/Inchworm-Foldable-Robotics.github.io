@@ -316,6 +316,9 @@ This configuration enabled synchronized gait control, timing adjustments, and ra
 
 *Figure 14. Electrical Schematic*
 
+Here is a link to the esp32 code: 
+- [boot.py](https://github.com/Inchworm-Foldable-Robotics/Mujoco-model/blob/main/boot.py)
+
 # Design Optimization
 
 After assembling the first working prototype, several rounds of optimization were performed to improve locomotion performance, structural consistency, and actuator behavior. These refinements were informed by a dozen iterative gait tests and targeted both the control logic and mechanical design.
