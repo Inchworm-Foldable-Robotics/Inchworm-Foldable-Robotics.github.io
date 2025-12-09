@@ -5,7 +5,9 @@ permalink: /results/
 author_profile: true
 ---
 
-In this section, the team displays the results of experimentation in both video and graph, and discusses the differences between trials.
+In this section, the team displays the results of experimentation in both video and graph, and discusses the differences between trials.    
+
+https://youtu.be/kaO62zham5g
 
 ![](..\assets\04_Results\P4_Inchworm_Good.mp4)
 
