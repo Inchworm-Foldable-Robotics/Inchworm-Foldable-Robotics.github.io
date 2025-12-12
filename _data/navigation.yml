@@ -35,8 +35,8 @@ main:
   - title: "MK 2"
     url: /mk2/
     
-  - title: "Project Assignment 1"
-    url: /project-assignment-1/
+  # - title: "Project Assignment 1"
+  #   url: /project-assignment-1/
 
   # - title: "CV"
   #   url: /cv/
