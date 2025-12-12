@@ -14,11 +14,9 @@ This site documents the semester project for [RAS 557: Foldable Robotics](https:
 Fall 2025,  
 Instructor: Daniel M. Aukes
 
-The course focuses on bio‑inspired terrestrial locomotion, foldable fabrication methods, and simulation‑driven design.
+The course focuses on bio‑inspired terrestrial locomotion, foldable fabrication methods, and simulation‑driven design.  
 
-The project investigates an inchworm‑inspired crawling robot based on the locomotion of [Manduca sexta larvae](https://en.wikipedia.org/wiki/Manduca_sexta).  
-
-The robot uses rigid foldable linkages and friction-modulated pads to realize a planar, two-anchor lift-and-drag gait whose parameters can be measured, simulated, and systematically varied.
+ArcFold is an inchworm‑inspired crawling robot based on the locomotion of [Manduca sexta larvae](https://en.wikipedia.org/wiki/Manduca_sexta). The robot uses rigid foldable linkages and friction‑modulated pads to realize a planar, two‑anchor lift‑and‑drag gait whose parameters can be modeled, fabricated, and systematically varied.  
 
 The project team consists of:
 
@@ -26,11 +24,24 @@ The project team consists of:
 - [Colin Fricke](https://www.linkedin.com/in/colin-fricke)
 - Nathan Vairora  
 
-The current work is organized around the following research question:
+
+The work is organized around a single guiding question that links biological analysis, dynamic simulation, foldable fabrication, and experimental testing.  
+
+
+## Biological Inspiration
+
+The primary biological inspiration is the Manduca sexta larva, a geometrid inchworm‑type crawler that uses a characteristic two‑anchor looping gait. Posterior prolegs anchor while the anterior body arches and extends; then the anterior prolegs anchor while the posterior body is pulled forward, generating large stride‑to‑body‑length ratios with relatively simple control [1]. Manduca’s crawling is driven by friction modulation between “anchored” and “sliding” contacts and by controlled body curvature rather than by discrete legs or wheels [1], [2].  
+
+Biomechanics studies provide quantitative targets for the robot’s kinematics and contact conditions. Manduca exhibits nearly orientation‑invariant proleg timing, stride periods on the order of 2–3 s, and stride lengths of roughly 0.3–0.5 body lengths [1]. Multi‑contact ground‑reaction measurements show that anterior prolegs generate forward thrust while posterior prolegs often serve as high‑friction anchors, with effective friction ratios between anchored and sliding states of approximately 3:1 [2]. Beam‑bending models of inchworm locomotion relate curvature, arc length, and forward displacement, constraining the lift height and deformation envelope that the mechanical analog should reproduce [3].  
+
+These insights motivate a foldable, rigid‑link crawler with two friction‑modulated pads and a controllable arching motion: a mechanism that abstracts the biological gait while remaining compatible with laminated fabrication and dynamic simulation.  
+
+
+## Research Question and Scope
+
+The project’s research question is:  
 
 > **How does gait timing (period) influence the achievable speed and robustness of an inchworm-inspired foldable crawler, in both simulation and experiment?**
-
-This home page summarizes how that question connects to the team’s goals, the biological and robotic background, and the design build simulate compare workflow of Project Assignment 2.
 
 ## Team Goals
 
